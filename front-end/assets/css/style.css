@@ -9893,5 +9893,25 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.bg-light {
+  background-color: #f3e9f1 !important;
+}
+
+.btn-light {
+  background-color: #f3e9f1 !important;
+}
+
+.text-dark {
+  color: black !important;
+}
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
 
 /*# sourceMappingURL=style.css.map */

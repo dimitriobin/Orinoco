@@ -2,42 +2,79 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Orinoco - Le e-commerce thématique !</title>
+    <meta name="description"
+        content="Orinoco est une boutique en ligne qui se démarque des grands site e-commerce en créant des applications thématiques ne vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour les vêtements.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="index, follow">
+    <!-- Facebook -->
+    <meta property="og:url" content="https://dimitriobin.github.io/Orinoco/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Orinoco - Le e-commerce thématique !" />
+    <meta property="og:description"
+        content="Orinoco est une boutique en ligne qui se démarque des grands site e-commerce en créant des applications thématiques ne vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour les vêtements." />
+    <meta property="og:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="website" />
+    <meta name="twitter:site" content="@orinoco" />
+    <meta name="twitter:creator" content="@orinoco" />
+    <meta name="twitter:title" content="Orinoco - Le e-commerce thématique !" />
+    <meta name="twitter:description"
+        content="Orinoco est une boutique en ligne qui se démarque des grands site e-commerce en créant des applications thématiques ne vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour les vêtements." />
+    <meta name="twitter:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Document</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+    <!-- Navigation bar -->
+    <header>
+        <nav class="navbar navbar-light bg-light px-5 text-center">
+            <a class="navbar-brand col-12 col-sm-4" href="index.html" aria-label="Rentournez sur la page principale">
+                <img class="img-responsive" srcset="assets/img/logo_200.png 200w, assets/img/logo_300.png 300w"
+                    sizes="(max-width: 991px) 200px, 300px" src="assets/img/logo_200.png 200w"
+                    alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
+            </a>
+            <a class="nav-link col-12 col-sm-1" href="pages-html/panier.html">
+                <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="container">
+        <!-- Jumbotron -->
+        <section aria-labelledby="headTitle" class="jumbotron bg-white my-5">
+            <h1 id="headTitle" class="display-4 text-break">
+                Chez Orinoco, nous vous proposons des produits de qualité personnalisables selon vos envies !
+            </h1>
+            <p class="lead">Venez visiter nos boutiques thématiques </p>
+        </section>
+
+        <!-- Choose of the shop -->
+        <section aria-label="Visitez nos boutiques">
+            <header aria-label="Naviguez vers nos diffèrentes boutiques" class="row">
+                <button type="button" aria-label="Notre boutique spécialisée en caméras"
+                    class="btn btn-lg btn-light col-md-4" href="#">Ori-Cameras</button>
+                <button type="button" aria-label="Notre boutique spécialisée en oursons"
+                    class="btn btn-lg btn-light my-3 my-md-0 col-md-4" href="#">Ori-Teddies</button>
+                <button type="button" aria-label="Notre boutique spécialisée en meubles"
+                    class="btn btn-lg btn-light col-md-4" href="#">Ori-Furnitures</button>
+            </header>
+        </section>
+    </main>
+
+
+    <!-- Footer bar -->
+    <footer class="mt-3 py-3 bg-light row text-center">
+        <a aria-label="En savoir plus sur nous" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">A propos de
+            nous</a>
+        <a aria-label="Nous contacter" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">Nous contacter</a>
+    </footer>
 </body>
 
 </html>
