@@ -1,14 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <title>Ma commande</title>
+    <meta name="description"
+        content="Voici le récapitulatif de votre commande. Merci d'avoir commandé chez Orinoco, nous espérons vous revoir très bientôt !">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, follow">
+    <!-- Facebook -->
+    <meta property="og:url" content="https://dimitriobin.github.io/Orinoco/pages-html/confirmation.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ma commande" />
+    <meta property="og:description"
+        content="Voici le récapitulatif de votre commande. Merci d'avoir commandé chez Orinoco, nous espérons vous revoir très bientôt !" />
+    <meta property="og:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="website" />
+    <meta name="twitter:site" content="@orinoco" />
+    <meta name="twitter:creator" content="@orinoco" />
+    <meta name="twitter:title" content="Ma commande" />
+    <meta name="twitter:description"
+        content="Voici le récapitulatif de votre commande. Merci d'avoir commandé chez Orinoco, nous espérons vous revoir très bientôt !" />
+    <meta name="twitter:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
+    <!-- Navigation bar -->
+    <header>
+        <nav class="navbar navbar-light bg-light px-5 text-center">
+            <a class="navbar-brand col-12 col-sm-4" href="../index.html" aria-label="Rentournez sur la page principale">
+                <img class="img-responsive" srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
+                    sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
+                    alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
+            </a>
+            <a class="nav-link col-12 col-sm-1 " href="panier.html">
+                <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+            </a>
+        </nav>
+    </header>
 
+    <!-- Main content -->
+    <main class="container p-4 my-4">
+        <h1 class="mb-5 text-center">Confirmation de votre commande</h1>
+        <div class="jumbotron bg-light">
+            <!-- Order details -->
+            <section class="bg-white p-4 mb-4 col-12">
+                <h2 class="text-center">Votre commande</h2>
+                <h3>Référence de votre commande :</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
+                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
+                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
+                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
+                    <li class="list-group-item">Article : gds12fd3s4f5ds4f5d3s41fd563s4f56ds</li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-4 mb-4 col-12">
+                <p>Merci _________ d'avoir commandé chez Orinoco !</p>
+                <p>Un mail de confirmation vous sera envoyé à _____@__.com contenant le récapitulatif de votre
+                    commande
+                    et les informations de livraison à votre adresse ______________ à ______. </p>
+            </section>
+
+            <!-- products list -->
+            <section class="bg-white p-4 col-12">
+                <h3>Le(s) produit(s) que vous avez commandé(s) :</h3>
+                <!-- Product template -->
+                <article class="card mb-3 border-0">
+                    <div class="row no-gutters w-100">
+                        <div class="col-md-4 my-auto">
+                            <img src="../assets/img/logo_300.png" alt="" class="card-img">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">Chaise vintage</h5>
+                                    <p class="card-text mb-0"><small class="text-muted">ref :
+                                            5412f3sd45fd5s64fd56s6</small>
+                                    </p>
+                                    <p class="card-text mb-0">Quantité : 1</p>
+                                    <p class="card-text mb-0">Prix unitaire : 799.99€</p>
+                                    <p class="card-text mb-1 font-weight-bold">Prix du lot : 8799.99€</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <p class="lead font-weight-bold">Prix total de votre commande : 764544€</p>
+            </section>
+        </div>
+
+        <!-- greetings -->
+        <section>
+            <p class="text-center lead">Nous vous remercions pour votre commande ! A très bientôt sur notre boutique !
+            </p>
+        </section>
+    </main>
+
+
+
+    <!-- footer bar -->
+    <footer class="mt-3 py-3 bg-light row text-center">
+        <a aria-label="En savoir plus sur nous" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">A propos de
+            nous</a>
+        <a aria-label="Nous contacter" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">Nous contacter</a>
+    </footer>
 </body>
 
 </html>
