@@ -1,14 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <title>Orinoco - Article Test</title>
+    <meta name="description"
+        content="Cet article est un produit de la boutique en ligne Orinoco qui se démaque en proposant des boutiques thématiques">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="index, follow">
+    <!-- Facebook -->
+    <meta property="og:url" content="https://dimitriobin.github.io/Orinoco/pages-html/produits.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Orinoco - Le e-commerce thématique !" />
+    <meta property="og:description"
+        content="Cet article est un produit de la boutique en ligne Orinoco qui se démaque en proposant des boutiques thématiques" />
+    <meta property="og:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="website" />
+    <meta name="twitter:site" content="@orinoco" />
+    <meta name="twitter:creator" content="@orinoco" />
+    <meta name="twitter:title" content="Orinoco - Le e-commerce thématique !" />
+    <meta name="twitter:description"
+        content="Cet article est un produit de la boutique en ligne Orinoco qui se démaque en proposant des boutiques thématiques" />
+    <meta name="twitter:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
+    <!-- Navigation bar -->
+    <header>
+        <nav class="navbar navbar-light bg-light px-5 text-center">
+            <a class="navbar-brand col-12 col-sm-4" href="../index.html" aria-label="Rentournez sur la page principale">
+                <img class="img-responsive" srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
+                    sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
+                    alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
+            </a>
+            <a class="nav-link col-12 col-sm-1" href="panier.html">
+                <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+            </a>
+        </nav>
+    </header>
 
+    <main class="container py-5">
+        <div class="jumbotron bg-white">
+            <h1 class="text-center">Produit choisi</h1>
+        </div>
+
+        <section class="row flex-column flex-md-row justify-content-between align-items-center border border-dark p-5">
+            <article class="col-12 col-md-5 mb-5 mb-md-0">
+                <img src="../assets/img/test.jpg" alt="" class="img-responsive">
+            </article>
+            <article class="col-12 col-md-6 text-break">
+                <h2>Nom du produit</h2>
+                <p class="text-muted"><small>ref : f4d65s4f5d6s4f5d6s4fd6s5f45ds64fd56s</small></p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto a qui dolorum laborum eius
+                    explicabo illo, voluptates vitae aut autem amet corrupti sed obcaecati animi quidem eligendi cum,
+                    voluptas quae?</p>
+                <div class="form-row align-items-center mb-3">
+                    <label class="col-auto mr-sm-2" for="inlineFormCustomSelect">Options : </label>
+                    <select class="col-4 custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                </div>
+                <div class="form-row align-items-center mb-3">
+                    <label class="col-auto" for="quantity">Quantité : </label>
+                    <select class="col-2 custom-select" name="" id="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                    </select>
+                </div>
+                <p class="lead">Prix : XX,XX€</p>
+                <button type="submit" class="btn btn-success w-75">Ajouter au panier</button>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Footer bar -->
+    <footer class="mt-3 py-3 bg-light row text-center">
+        <a aria-label="En savoir plus sur nous" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">A propos de
+            nous</a>
+        <a aria-label="Nous contacter" class="text-dark col-12 col-sm-6 my-2 my-sm-0" href="#">Nous contacter</a>
+    </footer>
 </body>
 
 </html>
