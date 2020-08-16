@@ -1,0 +1,24 @@
+{
+  "name": "orinoco",
+  "version": "1.0.0",
+  "description": "projet 5 ",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch assets/css/scss/style.scss:assets/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitriobin/Orinoco.git"
+  },
+  "author": "Dimitri Obin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimitriobin/Orinoco/issues"
+  },
+  "homepage": "https://github.com/dimitriobin/Orinoco#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "bootstrap": "^4.5.2",
+    "sass": "^1.26.10"
+  }
+}
