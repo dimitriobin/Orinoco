@@ -16,9 +16,6 @@
     "url": "https://github.com/dimitriobin/Orinoco/issues"
   },
   "homepage": "https://github.com/dimitriobin/Orinoco#readme",
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
-    "bootstrap": "^4.5.2",
-    "sass": "^1.26.10"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
