@@ -20,8 +20,15 @@ function fetchDatas(url) {
                 throw new Error(response.status);
             }
         }).then(function (data) {
-            console.log(data);
+            showProducts(data);
         })
+}
+
+function showProducts(datas) {
+    let
+    for (let i = 0; i < datas.length; i++) {
+
+    }
 }
 
 fetchDatas('http://localhost:3000/api/teddies');
