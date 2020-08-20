@@ -1,6 +1,10 @@
-.bottom {
-  position: absolute;
-  bottom: 0;
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  min-height: 100%;
 }
 
 .bg-light {
