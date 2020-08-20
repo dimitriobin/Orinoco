@@ -2,7 +2,7 @@ import {
     teddiesAPI,
     camerasAPI,
     furnitureAPI,
-    getDatas
+    request
 } from './main';
 
 let teddiesBtn = document.getElementById('oriTeddies');
@@ -11,7 +11,7 @@ let furnituresBtn = document.getElementById('oriFurnitures');
 
 // How to throw the list in the DOM 
 function showProducts(url, productTheme) {
-    getDatas(url)
+    request(url, 'GET')
         .then(function (datas) {
             console.log(datas);
             let listOfProducts = document.querySelector('#listOfProdutcs');
@@ -39,5 +39,5 @@ camerasBtn.addEventListener('click', function () {
     showProducts(camerasAPI, 'cameras');
 });
 furnituresBtn.addEventListener('click', function () {
-    showProducts(furnitureAPI, 'furnitures');
+    showProducts(furnitureAPI, 'furniture');
 });
