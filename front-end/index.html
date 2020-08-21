@@ -50,7 +50,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="container">
+    <main class="container min-vh-100">
         <!-- Jumbotron -->
         <section aria-labelledby="headTitle" class="row bg-white mt-5">
             <div class="col-12">
@@ -67,37 +67,42 @@
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <button type="button" aria-label="Notre boutique spécialisée en caméras"
-                            class="btn btn-lg btn-light col-12" href="#">Ori-Cameras</button>
+                            class="btn btn-lg btn-light col-12" href="#" id="oriCameras">Ori-Cameras</button>
                     </div>
                     <div class="col-12 col-md-4">
                         <button type="button" aria-label="Notre boutique spécialisée en oursons"
-                            class="btn btn-lg btn-light my-3 my-md-0 col-12" href="#">Ori-Teddies</button>
+                            class="btn btn-lg btn-light my-3 my-md-0 col-12" href="#"
+                            id="oriTeddies">Ori-Teddies</button>
                     </div>
                     <div class="col-12 col-md-4">
                         <button type="button" aria-label="Notre boutique spécialisée en meubles"
-                            class="btn btn-lg btn-light col-12" href="#">Ori-Furnitures</button>
+                            class="btn btn-lg btn-light col-12" href="#" id="oriFurnitures">Ori-Furnitures</button>
                     </div>
                 </div>
             </header>
-            <!-- template produit -->
-            <article class="card mx-3 mb-3 border-dark w-100">
-                <div class="row">
-                    <div class="col-12 col-md-4 my-auto">
-                        <img src="assets/img/logo_300.png" alt="" class="card-img">
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <div class="card-body">
-                            <h3 class="card-title">Chaise vintage</h5>
-                                <p class="card-text mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Blanditiis quaerat delectus laudantium consectetur? Minima enim sequi esse et
-                                    dolores, facilis, nihil quaerat impedit assumenda quo natus hic exercitationem, quod
-                                    eligendi.
-                                </p>
-                                <p class="card-text text-muted mb-1">Prix : 799.99€</p>
+            <div id="listOfProdutcs">
+                <!-- template produit -->
+                <!-- <article class="card mx-3 mb-3 border-dark w-100">
+                    <div class="row">
+                        <div class="col-12 col-md-4 my-auto">
+                            <img src="assets/img/logo_300.png" alt="" class="card-img">
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">Chaise vintage</h5>
+                                    <p class="card-text mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Blanditiis quaerat delectus laudantium consectetur? Minima enim sequi esse et
+                                        dolores, facilis, nihil quaerat impedit assumenda quo natus hic exercitationem,
+                                        quod
+                                        eligendi.
+                                    </p>
+                                    <p class="card-text text-muted mb-1">Prix : 799.99€</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article> -->
+            </div>
+
         </section>
     </main>
 
@@ -126,9 +131,10 @@
     <!-- Fontawesome kit -->
     <script src="https://kit.fontawesome.com/acd1cf4284.js" crossorigin="anonymous"></script>
 
-    <!-- script custom -->
+    <!-- polyfill babel -->
     <script src="/polyfill.bundle.js"></script>
-    <script src="/app.bundle.js"></script>
+    <!-- script custom -->
+    <script src="/index.bundle.js"></script>
 </body>
 
 </html>
