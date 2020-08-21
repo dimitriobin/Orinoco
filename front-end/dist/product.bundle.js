@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/js/product.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -107,6 +107,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ \"./assets/js/main.js\");\n // Looking through the url and put informations within constants\n\nvar params = new URLSearchParams(window.location.search);\nvar productId = params.get('id');\nvar productTheme = params.get('theme');\nvar productUrl = 'http://localhost:3000/api/' + productTheme + '/' + productId;\n\nfunction setLayout(product) {\n  console.log(product);\n  var options;\n\n  switch (productTheme) {\n    case 'teddies':\n      options = product.colors;\n      break;\n\n    case 'cameras':\n      options = product.lenses;\n      break;\n\n    case 'furniture':\n      options = product.varnish;\n      break;\n\n    default:\n      break;\n  }\n\n  document.getElementById('productImg').setAttribute('src', product.imageUrl);\n  document.getElementById('productImg').parentNode.setAttribute('href', product.imageUrl);\n  document.getElementById('productName').textContent = product.name;\n  document.getElementById('productRef').textContent = 'REF : ' + product._id;\n  document.getElementById('productDesc').textContent = product.description;\n\n  for (var j = 0; j < options.length; j++) {\n    document.getElementById('inlineFormCustomSelect').appendChild(document.createElement('option')).textContent = options[j];\n  }\n\n  document.getElementById('productPrice').textContent = product.price + '€';\n}\n\nObject(_main__WEBPACK_IMPORTED_MODULE_0__[\"request\"])(productUrl, 'GET').then(function (product) {\n  setLayout(product);\n});\n\n//# sourceURL=webpack:///./assets/js/product.js?");
+
+/***/ }),
+
+/***/ 1:
+/*!********************************************************!*\
+  !*** multi ./assets/js/product.js ./assets/js/main.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__(/*! ./assets/js/product.js */\"./assets/js/product.js\");\nmodule.exports = __webpack_require__(/*! ./assets/js/main.js */\"./assets/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./assets/js/product.js_./assets/js/main.js?");
 
 /***/ })
 
