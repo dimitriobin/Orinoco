@@ -34,10 +34,27 @@ function onLoadCartNumbers() {
 // initialize it
 onLoadCartNumbers();
 
+// Permet de convertir la chaine de charactere pour une meilleure lisibilté du prix
+function convertPrice(input) {
+    let price = JSON.stringify(input);
+    let output
+    if (price.length <= 5) {
+        output = price.slice(0, -2) + ',' + price.slice(-2) + '€';
+        return output;
+    } else if (price.length >= 6 && price.length <= 8) {
+        output = price.slice(0, -5) + ' ' + price.slice(-5, -2) + ',' + price.slice(-2) + '€';
+        return output;
+    } else if (price.length >= 9) {
+        output = price.slice(0, -9) + ' ' + price.slice(-8, -5) + ' ' + price.slice(-5, -2) + ',' + price.slice(-2) + '€';
+        return output
+    }
+}
+
 export {
     teddiesAPI,
     camerasAPI,
     furnitureAPI,
     request,
-    onLoadCartNumbers
+    onLoadCartNumbers,
+    convertPrice
 };

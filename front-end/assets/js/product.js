@@ -3,7 +3,8 @@ import {
     camerasAPI,
     furnitureAPI,
     request,
-    onLoadCartNumbers
+    onLoadCartNumbers,
+    convertPrice
 } from './main';
 
 
@@ -42,7 +43,7 @@ function setLayout(product) {
     for (let j = 0; j < options.length; j++) {
         document.getElementById('inlineFormCustomSelect').appendChild(document.createElement('option')).textContent = options[j];
     }
-    document.getElementById('productPrice').textContent = product.price + '€';
+    document.getElementById('productPrice').textContent = convertPrice(product.price);
 }
 
 

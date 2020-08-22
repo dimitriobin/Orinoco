@@ -2,7 +2,8 @@ import {
     teddiesAPI,
     camerasAPI,
     furnitureAPI,
-    request
+    request,
+    convertPrice
 } from './main';
 
 let teddiesBtn = document.getElementById('oriTeddies');
@@ -21,7 +22,7 @@ function showProducts(url, productTheme) {
                 let productImg = datas[i].imageUrl;
                 let productName = datas[i].name;
                 let productDescription = datas[i].description;
-                let productPrice = datas[i].price;
+                let productPrice = convertPrice(datas[i].price);
                 let productId = datas[i]._id
 
                 article.setAttribute('class', 'mb-3 border w-100');
