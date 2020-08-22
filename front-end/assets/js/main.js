@@ -10,19 +10,34 @@ function request(url, method) {
         xhr.open(method, url);
         xhr.responseType = 'json';
         xhr.onload = function () {
-            if (xhr.status === 200) {
+            if (this.status === 200) {
                 resolve(xhr.response)
             } else {
-                reject(console.log('error' + xhr.status))
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
             }
         }
         xhr.send();
     })
 }
 
+// Display the number of product in the header (aside the cart icon)
+function onLoadCartNumbers() {
+    let productNumber = localStorage.getItem('cartItems');
+    productNumber = JSON.parse(productNumber);
+    if (productNumber) {
+        document.querySelector('.cart span').textContent = productNumber.length;
+    }
+}
+// initialize it
+onLoadCartNumbers();
+
 export {
     teddiesAPI,
     camerasAPI,
     furnitureAPI,
-    request
+    request,
+    onLoadCartNumbers
 };
