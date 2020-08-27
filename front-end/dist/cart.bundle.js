@@ -81,20 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/js/index.js":
-/*!****************************!*\
-  !*** ./assets/js/index.js ***!
-  \****************************/
+/***/ "./assets/js/cart.js":
+/*!***************************!*\
+  !*** ./assets/js/cart.js ***!
+  \***************************/
 /*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ \"./assets/js/main.js\");\n\nvar teddiesBtn = document.getElementById('oriTeddies');\nvar camerasBtn = document.getElementById('oriCameras');\nvar furnituresBtn = document.getElementById('oriFurnitures'); // How to throw the list in the DOM \n\nfunction showProducts(url, productTheme) {\n  Object(_main__WEBPACK_IMPORTED_MODULE_0__[\"request\"])(url, 'GET').then(function (datas) {\n    console.log(datas);\n    var listOfProducts = document.querySelector('#listOfProdutcs');\n    listOfProducts.innerHTML = '';\n\n    for (var i = 0; i < datas.length; i++) {\n      var article = document.createElement('article');\n      var productImg = datas[i].imageUrl;\n      var productName = datas[i].name;\n      var productDescription = datas[i].description;\n      var productPrice = datas[i].price;\n      var productId = datas[i]._id;\n      article.setAttribute('class', 'mb-3 border w-100');\n      article.innerHTML = '<div class=\"row\"><div class=\"col-12 col-md-5 my-auto\"><img src=' + productImg + ' alt=\"Une photographie de ' + productName + '\" class=\"card-img h-100\"></div><div class=\"col-12 col-md-7\"><div class=\"card-body\"><h3 class=\"card-title\">' + productName + '</h5><p class=\"card-text mb-1\">' + productDescription + '</p><p class=\"card-text text-muted mb-1\">Prix : ' + productPrice + '</p><a href=\"pages-html/produits.html?id=' + productId + '&theme=' + productTheme + '\" class=\"stretched-link\" aria-label=\"Voir la fiche de ce produit\"></div></div></div>';\n      listOfProducts.appendChild(article);\n    }\n  });\n}\n\n; // Event on theme's buttons\n\nteddiesBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"teddiesAPI\"], 'teddies');\n});\ncamerasBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"camerasAPI\"], 'cameras');\n});\nfurnituresBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"furnitureAPI\"], 'furniture');\n});\n\n//# sourceURL=webpack:///./assets/js/index.js?");
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: ENOENT: no such file or directory, open 'C:\\\\Users\\\\User\\\\Documents\\\\Formation Developpeur Web Junior\\\\05_Construire un site e-commerce\\\\01_repositorie\\\\Orinoco\\\\front-end\\\\assets\\\\js\\\\cart.js'\");\n\n//# sourceURL=webpack:///./assets/js/cart.js?");
+
+/***/ }),
+
+/***/ "./assets/js/form.js":
+/*!***************************!*\
+  !*** ./assets/js/form.js ***!
+  \***************************/
+/*! no exports provided */
+/***/ (function(module, exports) {
+
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: ENOENT: no such file or directory, open 'C:\\\\Users\\\\User\\\\Documents\\\\Formation Developpeur Web Junior\\\\05_Construire un site e-commerce\\\\01_repositorie\\\\Orinoco\\\\front-end\\\\assets\\\\js\\\\form.js'\");\n\n//# sourceURL=webpack:///./assets/js/form.js?");
 
 /***/ }),
 
@@ -110,14 +120,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 0:
-/*!******************************************************!*\
-  !*** multi ./assets/js/index.js ./assets/js/main.js ***!
-  \******************************************************/
+/***/ 2:
+/*!*************************************************************************!*\
+  !*** multi ./assets/js/cart.js ./assets/js/form.js ./assets/js/main.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./assets/js/index.js */\"./assets/js/index.js\");\nmodule.exports = __webpack_require__(/*! ./assets/js/main.js */\"./assets/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./assets/js/index.js_./assets/js/main.js?");
+eval("__webpack_require__(/*! ./assets/js/cart.js */\"./assets/js/cart.js\");\n__webpack_require__(/*! ./assets/js/form.js */\"./assets/js/form.js\");\nmodule.exports = __webpack_require__(/*! ./assets/js/main.js */\"./assets/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./assets/js/cart.js_./assets/js/form.js_./assets/js/main.js?");
 
 /***/ })
 
