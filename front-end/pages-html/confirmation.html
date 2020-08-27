@@ -59,46 +59,46 @@
                 <h2 class="text-center mb-5">Votre commande</h2>
                 <table class="table table-striped">
                     <caption class="table_caption--up text-dark">Référence de votre commande :</caption>
-                    <tbody>
-                        <tr>
-                            <th scope="col" class="font-weight-bold">oursons</td>
-                            <td class="text-break orderID"></td>
+                    <thead>
+                        <tr class="font-weight-bold">
+                            <th>date</th>
+                            <th>référence</th>
                         </tr>
+                    </thead>
+                    <tbody id="refList">
+
                     </tbody>
                 </table>
             </section>
 
-            <section class="bg-white p-4 mb-4 col-12">
-                <p>Merci <span id="name"></span> d'avoir commandé chez Orinoco !</p>
-                <p>Un mail de confirmation vous sera envoyé à <span id="email"></span> contenant le récapitulatif de
-                    votre
-                    commande et les informations de livraison à votre adresse <span id="address"></span> à <span
-                        id="city"></span>.</p>
+            <section id="clientReferences" class="bg-white p-4 mb-4 col-12">
+
             </section>
 
             <!-- products list -->
-            <section id="articlesOrdered" class="bg-white p-4 col-12">
+            <section class="bg-white p-4 col-12">
                 <h3>Le(s) produit(s) que vous avez commandé(s) :</h3>
-                <!-- Product template -->
-                <article class="card mb-3 border-0">
-                    <div class="row no-gutters w-100">
-                        <div class="col-md-4 my-auto">
-                            <img src="../assets/img/logo_300.png" alt="" class="card-img">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="card-title">Chaise vintage</h5>
-                                    <p class="card-text mb-0"><small class="text-muted">ref :
-                                            5412f3sd45fd5s64fd56s6</small>
-                                    </p>
-                                    <p class="card-text mb-0">Quantité : 1</p>
-                                    <p class="card-text mb-0">Prix unitaire : 799.99€</p>
-                                    <p class="card-text mb-1 font-weight-bold">Prix du lot : 8799.99€</p>
+                <div id="articlesOrdered">
+                    <!-- Product template
+                    <article class="card mb-3 border-0">
+                        <div class="row no-gutters w-100">
+                            <div class="col-md-4 my-auto">
+                                <img src="../assets/img/logo_300.png" alt="" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title">Chaise vintage</h5>
+                                        <p class="card-text mb-0"><small class="text-muted">ref :
+                                                5412f3sd45fd5s64fd56s6</small>
+                                        </p>
+                                        <p class="card-text mb-0">Quantité : 1</p>
+                                        <p class="card-text mb-0">Prix unitaire : 799.99€</p>
+                                        <p class="card-text mb-1 font-weight-bold">Prix du lot : 8799.99€</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </article>
-                <p class="lead font-weight-bold">Prix total de votre commande : 764544€</p>
+                    </article> -->
+                </div>
             </section>
         </div>
 
