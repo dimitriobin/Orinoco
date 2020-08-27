@@ -44,7 +44,7 @@
                 </a>
                 <a class="cart" href="panier.html">
                     <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
-                    <span></span>
+                    <span class="badge badge-pill badge-dark"></span>
                 </a>
             </div>
         </div>
@@ -56,26 +56,28 @@
         <div class="jumbotron bg-light">
             <!-- Order details -->
             <section class="bg-white p-4 mb-4 col-12">
-                <h2 class="text-center">Votre commande</h2>
-                <h3>Référence de votre commande :</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
-                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
-                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
-                    <li class="list-group-item">Article : gds2fd3s4f5ds4f5d3s4fd563s4f56ds</li>
-                    <li class="list-group-item">Article : gds12fd3s4f5ds4f5d3s41fd563s4f56ds</li>
-                </ul>
+                <h2 class="text-center mb-5">Votre commande</h2>
+                <table class="table table-striped">
+                    <caption class="table_caption--up text-dark">Référence de votre commande :</caption>
+                    <tbody>
+                        <tr>
+                            <th scope="col" class="font-weight-bold">oursons</td>
+                            <td class="text-break orderID"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section class="bg-white p-4 mb-4 col-12">
-                <p>Merci _________ d'avoir commandé chez Orinoco !</p>
-                <p>Un mail de confirmation vous sera envoyé à _____@__.com contenant le récapitulatif de votre
-                    commande
-                    et les informations de livraison à votre adresse ______________ à ______. </p>
+                <p>Merci <span id="name"></span> d'avoir commandé chez Orinoco !</p>
+                <p>Un mail de confirmation vous sera envoyé à <span id="email"></span> contenant le récapitulatif de
+                    votre
+                    commande et les informations de livraison à votre adresse <span id="address"></span> à <span
+                        id="city"></span>.</p>
             </section>
 
             <!-- products list -->
-            <section class="bg-white p-4 col-12">
+            <section id="articlesOrdered" class="bg-white p-4 col-12">
                 <h3>Le(s) produit(s) que vous avez commandé(s) :</h3>
                 <!-- Product template -->
                 <article class="card mb-3 border-0">
@@ -135,7 +137,7 @@
 
     <!-- script custom -->
     <script src="/polyfill.bundle.js"></script>
-    <script src="/app.bundle.js"></script>
+    <script src="/confirmation.bundle.js"></script>
 </body>
 
 </html>

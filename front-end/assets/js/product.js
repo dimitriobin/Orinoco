@@ -48,7 +48,7 @@ function setLayout(product) {
 
 
 
-function cart(product) {
+function addToCart(product) {
     // put the datas in an object
     let item = new Object();
     item.id = product._id;
@@ -100,8 +100,8 @@ function cart(product) {
 }
 
 // Make a request with the _ID url and then throw the layout function
-request(productUrl, 'GET')
+request(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
-        cart(product);
+        addToCart(product);
     });

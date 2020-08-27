@@ -12,7 +12,7 @@ let furnituresBtn = document.getElementById('oriFurnitures');
 
 // How to throw the list in the DOM 
 function showProducts(url, productTheme) {
-    request(url, 'GET')
+    request(url, 'GET', 'json')
         .then(function (datas) {
             console.log(datas);
             let listOfProducts = document.querySelector('#listOfProdutcs');

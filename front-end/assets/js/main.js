@@ -2,15 +2,19 @@
 const teddiesAPI = 'http://localhost:3000/api/teddies';
 const camerasAPI = 'http://localhost:3000/api/cameras';
 const furnitureAPI = 'http://localhost:3000/api/furniture';
+const teddiesOrderAPI = 'http://localhost:3000/api/teddies/order';
+const camerasOrderAPI = 'http://localhost:3000/api/cameras/order';
+const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
 
 // XHR method
-function request(url, method) {
+function request(url, method, responseType, sendData, contentType) {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
-        xhr.responseType = 'json';
+        xhr.responseType = responseType;
+        xhr.setRequestHeader('Content-Type', contentType);
         xhr.onload = function () {
-            if (this.status === 200) {
+            if (this.status >= 200 && this.status < 300 && this.readyState === 4) {
                 resolve(xhr.response)
             } else {
                 reject({
@@ -19,7 +23,7 @@ function request(url, method) {
                 });
             }
         }
-        xhr.send();
+        xhr.send(sendData);
     })
 }
 
@@ -54,6 +58,9 @@ export {
     teddiesAPI,
     camerasAPI,
     furnitureAPI,
+    teddiesOrderAPI,
+    camerasOrderAPI,
+    furnitureOrderAPI,
     request,
     onLoadCartNumbers,
     convertPrice

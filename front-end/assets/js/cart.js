@@ -80,6 +80,7 @@ let plusBtn = document.querySelectorAll('.plusBtn');
 let minusBtn = document.querySelectorAll('.minusBtn');
 plusBtn.forEach(function (element, index, array) {
     plusBtn[index].addEventListener('click', function () {
+        cartItems[index].quantity = parseInt(cartItems[index].quantity, 10);
         cartItems[index].quantity += 1;
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         location.reload();
@@ -87,6 +88,7 @@ plusBtn.forEach(function (element, index, array) {
 })
 minusBtn.forEach(function (element, index, array) {
     minusBtn[index].addEventListener('click', function () {
+        cartItems[index].quantity = parseInt(cartItems[index].quantity, 10);
         cartItems[index].quantity -= 1;
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
         location.reload();

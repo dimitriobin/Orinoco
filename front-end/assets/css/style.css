@@ -18,3 +18,8 @@
 .justify-evenly {
   justify-content: space-evenly;
 }
+
+.table_caption--up {
+  caption-side: top !important;
+  font-size: 1.6rem;
+}
