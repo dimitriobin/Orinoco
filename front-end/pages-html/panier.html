@@ -106,23 +106,28 @@
                 <form id="contact" class="mt-4" name="contact">
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="first" class="col-md-2 col-form-label">Prénom : </label>
-                        <input type="text" name="firstName" id="firstName" class="form-control col-md-10" required>
+                        <input type="text" name="firstName" id="firstName" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="last" class="col-md-2 col-form-label">Nom : </label>
-                        <input type="text" name="lastName" id="lastName" class="form-control col-md-10" required>
+                        <input type="text" name="lastName" id="lastName" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="address" class="col-md-2 col-form-label">Adresse : </label>
-                        <input type="text" name="address" id="address" class="form-control col-md-10" required>
+                        <input type="text" name="address" id="address" class="form-control col-md-10"
+                            pattern="([0-9]*) ?([a-zàâçéèêëîïôûùüÿñæœ .-]*)" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="city" class="col-md-2 col-form-label">Ville : </label>
-                        <input type="text" name="city" id="city" class="form-control col-md-10" required>
+                        <input type="text" name="city" id="city" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="mail" class="col-md-2 col-form-label">E-mail : </label>
-                        <input type="email" name="email" id="email" class="form-control col-md-10" required>
+                        <input type="email" name="email" id="email" class="form-control col-md-10"
+                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
                     </div>
                     <button type="button" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
                 </form>
