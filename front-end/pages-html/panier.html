@@ -37,13 +37,14 @@
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
                 <a href="../index.html" aria-label="Retournez sur la page principale">
-                    <img class="img-responsive"
+                    <img class="img-responsive mb-4 mb-md-0"
                         srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
                         sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
-                <a href="panier.html">
+                <a class="cart" href="panier.html">
                     <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+                    <span class="badge badge-pill badge-dark"></span>
                 </a>
             </div>
         </div>
@@ -53,9 +54,9 @@
     <main class="container bg-light p-4 my-4">
         <div class="row no-gutters justify-content-between">
             <!-- Order details -->
-            <section class="bg-white p-4 mb-4 col-12">
-                <h1 class="mb-5">Mon panier (1 article)</h1>
-                <!-- Product template -->
+            <section id="productsReview" class="bg-white p-4 mb-4 col-12">
+                <h1 id="cartTitle" class="mb-5">Mon panier</h1>
+                <!-- Product template
                 <article class="card mb-3 border-0">
                     <div class="row no-gutters w-100">
                         <div class="col-md-4 my-auto">
@@ -78,32 +79,22 @@
                             </div>
                         </div>
                     </div>
-                </article>
+                </article> -->
             </section>
 
             <!-- Total -->
             <section class="bg-white p-4 mb-4 col-12 h-25">
                 <h2>Total</h2>
-                <table class="table table-borderless table-striped">
+                <table class="table table-borderless table-striped ">
                     <caption class="sr-only">Sous-total</caption>
-                    <tbody>
-                        <tr>
-                            <th scope="row">article 1 (x4)</th>
-                            <td>504€</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">article 2 (x6)</th>
-                            <td>53241€</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">article 3 (x2)</th>
-                            <td>543€</td>
-                        </tr>
+                    <tbody id="productList">
+                    </tbody>
+                    <tfoot>
                         <tr class="font-weight-bold">
                             <th scope="row">Total</th>
-                            <td>54344€</td>
+                            <td id="totalAmmount"></td>
                         </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
             </section>
         </div>
@@ -112,28 +103,33 @@
         <section class="bg-white p-4">
             <h2>Finalisez votre commande</h2>
             <div class="w-75 mx-auto">
-                <form action="" method="GET" class="mt-4">
-                    <div class="form-group row justify-content-between no-gutters">
-                        <label for="last" class="col-md-2 col-form-label">Nom : </label>
-                        <input type="text" name="lastName" id="last" class="form-control col-md-10">
-                    </div>
+                <form id="contact" class="mt-4" name="contact">
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="first" class="col-md-2 col-form-label">Prénom : </label>
-                        <input type="text" name="lastName" id="first" class="form-control col-md-10">
+                        <input type="text" name="firstName" id="firstName" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
+                    </div>
+                    <div class="form-group row justify-content-between no-gutters">
+                        <label for="last" class="col-md-2 col-form-label">Nom : </label>
+                        <input type="text" name="lastName" id="lastName" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="address" class="col-md-2 col-form-label">Adresse : </label>
-                        <input type="text" name="address" id="address" class="form-control col-md-10">
+                        <input type="text" name="address" id="address" class="form-control col-md-10"
+                            pattern="([0-9]*) ?([a-zàâçéèêëîïôûùüÿñæœ .-]*)" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="city" class="col-md-2 col-form-label">Ville : </label>
-                        <input type="text" name="city" id="city" class="form-control col-md-10">
+                        <input type="text" name="city" id="city" class="form-control col-md-10"
+                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="mail" class="col-md-2 col-form-label">E-mail : </label>
-                        <input type="email" name="mail" id="mail" class="form-control col-md-10">
+                        <input type="email" name="email" id="email" class="form-control col-md-10"
+                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Envoyer</button>
+                    <button type="button" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
                 </form>
             </div>
         </section>
@@ -162,6 +158,10 @@
     </script>
     <!-- Fontawesome kit -->
     <script src="https://kit.fontawesome.com/acd1cf4284.js" crossorigin="anonymous"></script>
+    <!-- polyfill babel -->
+    <script src="/polyfill.bundle.js"></script>
+    <!-- script custom -->
+    <script src="/cart.bundle.js"></script>
 </body>
 
 </html>

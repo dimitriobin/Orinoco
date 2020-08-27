@@ -81,20 +81,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/js/index.js":
-/*!****************************!*\
-  !*** ./assets/js/index.js ***!
-  \****************************/
+/***/ "./assets/js/confirmation.js":
+/*!***********************************!*\
+  !*** ./assets/js/confirmation.js ***!
+  \***********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ \"./assets/js/main.js\");\n\nvar teddiesBtn = document.getElementById('oriTeddies');\nvar camerasBtn = document.getElementById('oriCameras');\nvar furnituresBtn = document.getElementById('oriFurnitures'); // How to throw the list in the DOM \n\nfunction showProducts(url, productTheme) {\n  Object(_main__WEBPACK_IMPORTED_MODULE_0__[\"request\"])(url, 'GET', 'json').then(function (datas) {\n    console.log(datas);\n    var listOfProducts = document.querySelector('#listOfProdutcs');\n    listOfProducts.innerHTML = '';\n\n    for (var i = 0; i < datas.length; i++) {\n      var article = document.createElement('article');\n      var productImg = datas[i].imageUrl;\n      var productName = datas[i].name;\n      var productDescription = datas[i].description;\n      var productPrice = Object(_main__WEBPACK_IMPORTED_MODULE_0__[\"convertPrice\"])(datas[i].price);\n      var productId = datas[i]._id;\n      article.setAttribute('class', 'mb-3 border w-100');\n      article.innerHTML = '<div class=\"row\"><div class=\"col-12 col-md-5 my-auto\"><img src=' + productImg + ' alt=\"Une photographie de ' + productName + '\" class=\"card-img h-100\"></div><div class=\"col-12 col-md-7\"><div class=\"card-body\"><h3 class=\"card-title\">' + productName + '</h5><p class=\"card-text mb-1\">' + productDescription + '</p><p class=\"card-text text-muted mb-1\">Prix : ' + productPrice + '</p><a href=\"pages-html/produits.html?id=' + productId + '&theme=' + productTheme + '\" class=\"stretched-link\" aria-label=\"Voir la fiche de ce produit\"></div></div></div>';\n      listOfProducts.appendChild(article);\n    }\n  });\n}\n\n; // Event on theme's buttons\n\nteddiesBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"teddiesAPI\"], 'teddies');\n});\ncamerasBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"camerasAPI\"], 'cameras');\n});\nfurnituresBtn.addEventListener('click', function () {\n  showProducts(_main__WEBPACK_IMPORTED_MODULE_0__[\"furnitureAPI\"], 'furniture');\n});\n\n//# sourceURL=webpack:///./assets/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.js */ \"./assets/js/main.js\");\n\nvar orderInformations = localStorage.getItem('orders');\norderInformations = JSON.parse(orderInformations);\n\n(function displayOrderReferences() {\n  var refList = document.getElementById('refList');\n  var date = new Date();\n  date = date.toLocaleString(date);\n  refList.innerHTML += \"\\n        <tr>\\n            <th scope=\\\"col\\\">\".concat(date, \"</td>\\n            <td class=\\\"text-break orderID\\\">\").concat(orderInformations.orderId, \"</td>\\n        </tr>\\n    \");\n})();\n\n(function displayClientReferences() {\n  var clientReferences = document.getElementById('clientReferences');\n  clientReferences.innerHTML += \"\\n        <p>Merci <span class=\\\"font-weight-bold\\\">\".concat(orderInformations.contact.firstName, \"</span> <span class=\\\"font-weight-bold\\\">\").concat(orderInformations.contact.lastName, \"</span> d'avoir command\\xE9 chez Orinoco !</p>\\n        <p>Un mail de confirmation vous sera envoy\\xE9 \\xE0 <span class=\\\"font-weight-bold\\\">\").concat(orderInformations.contact.email, \"</span> contenant le r\\xE9capitulatif de\\n        votre commande et les informations de livraison \\xE0 votre adresse <span class=\\\"font-weight-bold\\\">\").concat(orderInformations.contact.address, \"</span> \\xE0 <span class=\\\"font-weight-bold\\\">\").concat(orderInformations.contact.city, \"</span>.</p>\\n    \");\n})();\n\n(function displayProducts() {\n  var articlesOrdered = document.querySelector('#articlesOrdered');\n  var total = 0;\n  var products = localStorage.getItem('cartItems');\n  products = JSON.parse(products);\n  console.log(products);\n\n  for (var j = 0; j < products.length; j++) {\n    var element = products[j];\n    articlesOrdered.innerHTML += \"\\n        <article class=\\\"card mb-3 border\\\">\\n            <div class=\\\"row no-gutters w-100\\\">\\n                <div class=\\\"col-md-4 my-auto\\\">\\n                    <img src=\\\"\".concat(element.imgUrl, \"\\\" alt=\\\"\\\" class=\\\"card-img\\\">\\n                </div>\\n                <div class=\\\"col-md-8\\\">\\n                    <div class=\\\"card-body\\\">\\n                        <h3 class=\\\"card-title\\\">\").concat(element.name, \"</h5>\\n                            <p class=\\\"card-text mb-0\\\"><small class=\\\"text-muted\\\">ref :\\n                            \").concat(element.id, \"</small>\\n                            </p>\\n                            <p class=\\\"card-text mb-0\\\">Quantit\\xE9 : \").concat(element.quantity, \"</p>\\n                            <p class=\\\"card-text mb-0\\\">Prix unitaire : \").concat(Object(_main_js__WEBPACK_IMPORTED_MODULE_0__[\"convertPrice\"])(element.price), \"</p>\\n                            <p class=\\\"card-text mb-1 font-weight-bold\\\">Prix du lot : \").concat(Object(_main_js__WEBPACK_IMPORTED_MODULE_0__[\"convertPrice\"])(element.price * element.quantity), \"</p>\\n                    </div>\\n                </div>\\n            </div>\\n        </article>\\n    \");\n    total += element.price * element.quantity;\n  }\n\n  var totalOutput = document.createElement('p');\n  totalOutput.innerHTML = \"Prix total de votre commande : \".concat(Object(_main_js__WEBPACK_IMPORTED_MODULE_0__[\"convertPrice\"])(total));\n  totalOutput.setAttribute('class', 'lead font-weight-bold');\n  articlesOrdered.parentNode.appendChild(totalOutput);\n})();\n\n//# sourceURL=webpack:///./assets/js/confirmation.js?");
 
 /***/ }),
 
@@ -110,14 +110,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 0:
-/*!******************************************************!*\
-  !*** multi ./assets/js/index.js ./assets/js/main.js ***!
-  \******************************************************/
+/***/ 3:
+/*!*************************************************************!*\
+  !*** multi ./assets/js/confirmation.js ./assets/js/main.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./assets/js/index.js */\"./assets/js/index.js\");\nmodule.exports = __webpack_require__(/*! ./assets/js/main.js */\"./assets/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./assets/js/index.js_./assets/js/main.js?");
+eval("__webpack_require__(/*! ./assets/js/confirmation.js */\"./assets/js/confirmation.js\");\nmodule.exports = __webpack_require__(/*! ./assets/js/main.js */\"./assets/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./assets/js/confirmation.js_./assets/js/main.js?");
 
 /***/ })
 
