@@ -42,8 +42,9 @@
                         sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
-                <a href="panier.html">
+                <a class="cart" href="panier.html">
                     <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+                    <span class="badge badge-pill badge-dark"></span>
                 </a>
             </div>
         </div>
@@ -69,20 +70,20 @@
                 <div class="form-row align-items-center mb-3">
                     <label class="col-auto" for="quantity">Quantité : </label>
                     <select class="col-2 custom-select" name="" id="quantity">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </div>
                 <p id="productPrice" class="lead">Prix : XX,XX€</p>
-                <button id="submitBtn" type="submit" class="btn btn-success w-75">Ajouter au panier</button>
+                <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au panier</button>
             </article>
 
         </section>
