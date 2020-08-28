@@ -54,6 +54,30 @@ function convertPrice(input) {
     }
 }
 
+// popup function
+function popup(btn, modal) {
+    let body = document.querySelector('body');
+    let modalBtn = document.querySelector(btn);
+    let modalBg = document.querySelector(modal)
+
+    modalBtn.addEventListener('click', function (e) {
+        e.stopPropagation()
+        modalBg.classList.add('modal-bg-active');
+
+        body.addEventListener('click', function () {
+            modalBg.classList.remove('modal-bg-active');
+        })
+    });
+
+
+}
+
+// Informations pour le contact dans le footer
+popup('#aboutPopup', '#aboutUs');
+
+// Informations pour le 'a propos'' dans le footer
+popup('#contactPopup', '#contactUs');
+
 export {
     teddiesAPI,
     camerasAPI,
@@ -63,5 +87,6 @@ export {
     furnitureOrderAPI,
     request,
     onLoadCartNumbers,
-    convertPrice
+    convertPrice,
+    popup
 };
