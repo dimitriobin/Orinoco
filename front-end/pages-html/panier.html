@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column vh-100">
     <!-- Navigation bar -->
     <header class="container-fluid bg-light py-4">
         <div class="container">
@@ -103,7 +103,7 @@
         <section class="bg-white p-4">
             <h2>Finalisez votre commande</h2>
             <div class="w-75 mx-auto">
-                <form id="contact" class="mt-4" name="contact">
+                <form action="" id="contact" class="mt-4" name="contact">
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="first" class="col-md-2 col-form-label">Prénom : </label>
                         <input type="text" name="firstName" id="firstName" class="form-control col-md-10"
@@ -129,19 +129,54 @@
                         <input type="email" name="email" id="email" class="form-control col-md-10"
                             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
                     </div>
-                    <button type="button" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
+                    <button type="submit" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
                 </form>
             </div>
         </section>
     </main>
 
+    <!-- Popup for confirmation of submission -->
+    <div id="confirmation" class="modal-bg">
+        <div class="modal p-3 text-center rounded-lg">
+
+        </div>
+    </div>
+
+
+    <!-- Popup for contact informations -->
+    <div id="contactUs" class="modal-bg">
+        <div class="modal p-3 text-center rounded-lg">
+            <h3>Nous contacter</h3>
+            <div>
+                <h4 class="mb-3">Orinoco</h4>
+                <p>Adresse : 62, rue Isambard, 75000 Paris</p>
+                <p>Téléphone : 02.72.57.63.22</p>
+                <p><a href="mailto:contact@orinoco.fr">contact@orinoco.fr</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- popup for brand informations -->
+    <div id="aboutUs" class="modal-bg">
+        <div class="modal p-3 text-center rounded-lg">
+            <h3>A propos de nous</h3>
+            <div>
+                <h4 class="mb-3">Orinoco</h4>
+                <p>Nous souhaitons nous démarquer des grands site e-commerce en créant des applications thématiques ne
+                    vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
+                    les vêtements.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer bar -->
-    <footer class="mt-3 py-3 bg-light container-fluid">
+    <footer class="footer mt-auto py-3 bg-light container-fluid">
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
-                <a aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos de
-                    nous</a>
-                <a aria-label="Nous contacter" class="text-dark my-2 my-sm-0" href="#">Nous contacter</a>
+                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos
+                    de nous</a>
+                <a id="contactPopup" aria-label="Nous contacter" class="text-dark my-2 my-sm-0" href="#">Nous
+                    contacter</a>
             </div>
         </div>
     </footer>
