@@ -6,7 +6,7 @@ import {
     popup
 } from './main';
 
-let submitBtn = document.getElementById('submitRequest');
+let form = document.getElementById('contact');
 // Récupérer les données du panier
 let cartItems = localStorage.getItem('cartItems');
 cartItems = JSON.parse(cartItems);
@@ -26,7 +26,6 @@ function bodyRequest() {
     for (const product of cartItems) {
         products.push(product.id);
     }
-    console.log(products)
     let body = {
         contact,
         products
@@ -37,6 +36,7 @@ function bodyRequest() {
 // fonction pour envoyer la reponse du serveur au localStorage afin d'utiliser les données ultérieurement
 function orderStorage(order) {
     localStorage.setItem('orders', order);
+    localStorage.setItem('productsOrdered', JSON.stringify(cartItems));
 }
 
 // 
@@ -46,35 +46,108 @@ function order() {
     return body;
 }
 
-submitBtn.addEventListener('click', function (e) {
-    e.preventDefault();
+function formValidation() {
+    let firstName = document.getElementById('firstName');
+    const firstNameValidation = /^[A-Za-zÀ-ÿ .-]+$/;
+
+    let lastName = document.querySelector('#lastName');
+    const lastNameValidation = /^[A-Za-zÀ-ÿ .-]+$/;
+
+    let address = document.querySelector('#address');
+    const addressValidation = /^([0-9]{1,4})\s([ A-Za-zÀ-ÿ0-9-'])+$/;
+    // /^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9-']*$/;
+
+    let city = document.querySelector('#city');
+    const cityValidation = /^[A-Za-zÀ-ÿ .-]+$/;
+
+    let email = document.querySelector('#email');
+    const emailValidation = /^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$/;
+    if (!firstNameValidation.test(firstName.value)) {
+        firstName.nextElementSibling.innerHTML = 'Veuillez entrez votre prénom au bon format.';
+        firstName.nextElementSibling.className = 'error active';
+
+        firstName.addEventListener('input', () => {
+            if (firstNameValidation.test(firstName.value)) {
+                firstName.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+                firstName.nextElementSibling.className = 'error';
+            }
+        });
+    }
+
+    if (!lastNameValidation.test(lastName.value)) {
+        lastName.nextElementSibling.innerHTML = 'Veuillez entrez votre nom au bon format.';
+        lastName.nextElementSibling.className = 'error active';
+
+        lastName.addEventListener('input', () => {
+            if (lastNameValidation.test(lastName.value)) {
+                lastName.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+                lastName.nextElementSibling.className = 'error';
+            }
+        });
+    }
+
+    if (!addressValidation.test(address.value)) {
+        address.nextElementSibling.innerHTML = 'Veuillez entrez votre adresse au bon format.';
+        address.nextElementSibling.className = 'error active';
+
+        address.addEventListener('input', () => {
+            if (addressValidation.test(address.value)) {
+                address.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+                address.nextElementSibling.className = 'error';
+            }
+        });
+    }
+
+    if (!cityValidation.test(city.value)) {
+        city.nextElementSibling.innerHTML = 'Veuillez entrez votre ville au bon format.';
+        city.nextElementSibling.className = 'error active';
+
+        city.addEventListener('input', () => {
+            if (cityValidation.test(city.value)) {
+                city.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+                city.nextElementSibling.className = 'error';
+            }
+        });
+    }
+
+    if (!emailValidation.test(email.value)) {
+        email.nextElementSibling.innerHTML = 'Veuillez entrez votre e-mail au bon format.';
+        email.nextElementSibling.className = 'error active';
+
+        email.addEventListener('input', () => {
+            if (emailValidation.test(email.value)) {
+                email.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+                email.nextElementSibling.className = 'error';
+            }
+        });
+    }
+
+};
+
+
+
+form.addEventListener('submit', function (e) {
+    formValidation();
     let requestBody = order();
     request(camerasOrderAPI, 'POST', 'text', requestBody, 'application/json')
         .then((response) => {
             orderStorage(response)
         })
         .then(function () {
+            let modalBg = document.querySelector('#confirmation')
+            modalBg.classList.add('modal-bg-active');
             let confirmPopup = document.querySelector('#confirmation div');
             confirmPopup.innerHTML += `
                 <h3>Votre commande est validée</h3>
                 <p>Vous allez être redirigé vers une page de confirmation de commande !</p>
             `
+            // Reset le panier
+            localStorage.removeItem('cartItems');
             // Lancer la redirection après 4s
             setTimeout(function () {
                 window.location = 'confirmation.html'
             }, 4000);
         })
-        .catch(function (error) {
-            let confirmPopup = document.querySelector('#confirmation div');
-            confirmPopup.innerHTML += `
-                <h3>Votre commande n'a pas pu être validée</h3>
-                <p>Veuillez réessayer dans quelques minutes, si le problème persiste, vous pouvez nous contacter (voir rubrique "contact")</p>
-            `;
-            // Recharger la page après 4s
-            setTimeout(function () {
-                window.location.reload();
-            }, 4000);
-        });
+        .catch(function (error) {});
+    e.preventDefault();
 });
-
-popup('#submitRequest', '#confirmation');

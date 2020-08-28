@@ -12,6 +12,8 @@ import {
 
 let orderInformations = localStorage.getItem('orders');
 orderInformations = JSON.parse(orderInformations);
+let productsOrdered = localStorage.getItem('productsOrdered');
+productsOrdered = JSON.parse(productsOrdered);
 
 (function displayOrderReferences() {
     let refList = document.getElementById('refList');
@@ -39,9 +41,7 @@ orderInformations = JSON.parse(orderInformations);
 (function displayProducts() {
     let articlesOrdered = document.querySelector('#articlesOrdered');
     let total = 0;
-    let products = localStorage.getItem('cartItems');
-    products = JSON.parse(products);
-    console.log(products)
+    let products = productsOrdered;
     for (let j = 0; j < products.length; j++) {
         const element = products[j];
         articlesOrdered.innerHTML += `

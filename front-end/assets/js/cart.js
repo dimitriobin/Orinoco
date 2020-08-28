@@ -11,21 +11,36 @@ let total = 0;
 
 // Add the number of product in the h1
 let title = document.getElementById('cartTitle');
+let formSection = document.getElementById('formSection');
+let orderReview = document.getElementById('orderReview');
 let cartItems = localStorage.getItem('cartItems');
 cartItems = JSON.parse(cartItems);
 
+
+
 if (cartItems) {
-    if (cartItems.length > 1) {
-        title.textContent = 'Mon panier (' + cartItems.length + ' articles )'
+    if (cartItems.length > 0) {
+        if (cartItems.length === 1) {
+            title.textContent = 'Mon panier (' + cartItems.length + ' article )'
+        } else {
+            title.textContent = 'Mon panier (' + cartItems.length + ' articles )'
+        }
+        displayTotal();
+        displayCart();
+        formSection.classList.remove('d-none');
     } else {
-        title.textContent = 'Mon panier (' + cartItems.length + ' article )'
+        title.textContent = 'Votre panier est vide'
     }
+} else {
+    title.textContent = 'Votre panier est vide'
 }
 
-function displayCart(product, img) {
-    // Add the product in the first section
-    let productsReview = document.getElementById('productsReview');
-    productsReview.innerHTML += `
+function displayCart(product) {
+    for (let i = 0; i < cartItems.length; i++) {
+        const product = cartItems[i];
+        // Add the product in the first section
+        let productsReview = document.getElementById('productsReview');
+        productsReview.innerHTML += `
         <article class="card mb-3 border">
             <div class="row no-gutters w-100">
                 <div class="col-12 col-md-5 my-auto">
@@ -54,24 +69,41 @@ function displayCart(product, img) {
         </article>
     `;
 
-    // add the product in the list of references
-    let productList = document.getElementById('productList');
-    let productTotal = product.price * product.quantity;
+        // add the product in the list of references
+        let productList = document.getElementById('productList');
+        let productTotal = product.price * product.quantity;
 
-    productList.innerHTML += `
+        productList.innerHTML += `
         <tr>
             <th scope="row" class="text-break">${product.id} (x${product.quantity})</th>
             <td>${(convertPrice(productTotal))}</td>
         </tr>
     `;
-    // Display the total amount
-    total += productTotal;
-    document.getElementById('totalAmmount').textContent = `${convertPrice(total)}`;
+        // Display the total amount
+        total += productTotal;
+        document.getElementById('totalAmmount').textContent = `${convertPrice(total)}`;
+    }
 }
 
-for (let i = 0; i < cartItems.length; i++) {
-    const product = cartItems[i];
-    displayCart(product);
+function displayTotal() {
+    // display the 'total' section
+    let totalSection = document.createElement('section');
+    orderReview.appendChild(totalSection);
+    totalSection.classList.add('bg-white', 'p-4', 'mb-4', 'col-12', 'h-25', 'rounded-lg');
+    totalSection.innerHTML += `
+        <h2>Total</h2>
+        <table class="table table-borderless table-striped ">
+            <caption class="sr-only">Sous-total</caption>
+            <tbody id="productList">
+            </tbody>
+            <tfoot>
+                <tr class="font-weight-bold">
+                    <th scope="row">Total</th>
+                    <td id="totalAmmount"></td>
+                </tr>
+            </tfoot>
+        </table>
+    `
 }
 
 
@@ -99,8 +131,13 @@ minusBtn.forEach(function (element, index, array) {
 let removeBtn = document.querySelectorAll('.removeBtn');
 removeBtn.forEach(function (element, index, array) {
     removeBtn[index].addEventListener('click', function () {
-        cartItems.splice(index, 1);
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        location.reload();
+        if (cartItems.length > 1) {
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            location.reload();
+        } else {
+            localStorage.removeItem('cartItems');
+            location.reload();
+        }
     })
 })
