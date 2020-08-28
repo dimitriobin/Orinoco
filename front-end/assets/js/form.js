@@ -2,7 +2,8 @@ import {
     teddiesOrderAPI,
     camerasOrderAPI,
     furnitureOrderAPI,
-    request
+    request,
+    popup
 } from './main';
 
 let submitBtn = document.getElementById('submitRequest');
@@ -53,7 +54,27 @@ submitBtn.addEventListener('click', function (e) {
             orderStorage(response)
         })
         .then(function () {
-            // Lancer la redirection
-            window.location = 'confirmation.html'
+            let confirmPopup = document.querySelector('#confirmation div');
+            confirmPopup.innerHTML += `
+                <h3>Votre commande est validée</h3>
+                <p>Vous allez être redirigé vers une page de confirmation de commande !</p>
+            `
+            // Lancer la redirection après 4s
+            setTimeout(function () {
+                window.location = 'confirmation.html'
+            }, 4000);
         })
+        .catch(function (error) {
+            let confirmPopup = document.querySelector('#confirmation div');
+            confirmPopup.innerHTML += `
+                <h3>Votre commande n'a pas pu être validée</h3>
+                <p>Veuillez réessayer dans quelques minutes, si le problème persiste, vous pouvez nous contacter (voir rubrique "contact")</p>
+            `;
+            // Recharger la page après 4s
+            setTimeout(function () {
+                window.location.reload();
+            }, 4000);
+        });
 });
+
+popup('#submitRequest', '#confirmation');
