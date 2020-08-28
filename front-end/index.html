@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://dimitriobin.github.io/Orinoco/assets/img/logo_200.png" />
 
     <!-- Stylesheets -->
-    <!-- <link rel="stylesheet" href="../assets/css/reset.css"> -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -108,14 +108,41 @@
         </section>
     </main>
 
+    <!-- Popup for contact informations -->
+    <div id="contactUs" class="modal-bg">
+        <div class="modal text-center rounded-lg">
+            <h3>Nous contacter</h3>
+            <div>
+                <h4 class="mb-3">Orinoco</h4>
+                <p>Adresse : 62, rue Isambard, 75000 Paris</p>
+                <p>Téléphone : 02.72.57.63.22</p>
+                <p><a href="mailto:contact@orinoco.fr">contact@orinoco.fr</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- popup for brand informations -->
+    <div id="aboutUs" class="modal-bg">
+        <div class="modal text-center rounded-lg">
+            <h3>A propos de nous</h3>
+            <div>
+                <h4 class="mb-3">Orinoco</h4>
+                <p>Nous souhaitons nous démarquer des grands site e-commerce en créant des applications thématiques ne
+                    vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
+                    les vêtements.</p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer bar -->
     <footer class="footer mt-auto py-3 bg-light container-fluid">
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
-                <a aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos de
-                    nous</a>
-                <a aria-label="Nous contacter" class="text-dark my-2 my-sm-0" href="#">Nous contacter</a>
+                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos
+                    de nous</a>
+                <a id="contactPopup" aria-label="Nous contacter" class="text-dark my-2 my-sm-0" href="#">Nous
+                    contacter</a>
             </div>
         </div>
     </footer>

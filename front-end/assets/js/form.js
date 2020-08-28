@@ -47,7 +47,6 @@ function order() {
 
 submitBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    this.setAttribute('disabled', '');
     let requestBody = order();
     request(camerasOrderAPI, 'POST', 'text', requestBody, 'application/json')
         .then((response) => {

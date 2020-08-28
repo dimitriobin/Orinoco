@@ -4,7 +4,8 @@ import {
     furnitureAPI,
     request,
     onLoadCartNumbers,
-    convertPrice
+    convertPrice,
+    popup
 } from './main';
 
 
@@ -71,14 +72,18 @@ function addToCart(product) {
                 // Si le produit existe déjà dans le panier
                 if (cartItems[i].id === item.id) {
                     // Ajouter la quantité à l'ancienne valeur.
-                    console.log("Quantité changée !");
+                    document.getElementById('productAddedTitle').innerHTML += `
+                        <i class="fas fa-check-circle text-success mr-3"></i>La quantité a été changée !
+                    `
                     cartItems[i].quantity = parseInt(cartItems[i].quantity);
                     cartItems[i].quantity += parseInt(item.quantity);
                     // Renvoyer les données dans le storage sous forme de STRING
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 } else if (i === (cartItems.length - 1) && cartItems[i] !== item.id) {
-                    console.log("Produit ajouté !")
+                    document.getElementById('productAddedTitle').innerHTML += `
+                    <i class="fas fa-check-circle text-success mr-sm-3"></i>Article ajouté !
+                    `
                     // Ajouter l'objet dans ce tableau
                     cartItems.push(item);
                     // Renvoyer les données dans le storage sous forme de STRING
@@ -87,7 +92,9 @@ function addToCart(product) {
                 }
             }
         } else {
-            console.log("Premier produit dans le panier !")
+            document.getElementById('productAddedTitle').innerHTML += `
+                <i class="fas fa-check-circle text-success mr-sm-3"></i>Premier article dans votre panier !
+            `
             // Créer un tableau
             cartItems = [];
             // Ajouter l'objet dans ce tableau
@@ -104,4 +111,5 @@ request(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
         addToCart(product);
+        popup('#addToCartBtn', '#productAdded')
     });
