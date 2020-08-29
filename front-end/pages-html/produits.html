@@ -42,9 +42,12 @@
                         sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
-                <a class="cart p-2" href="panier.html">
-                    <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+                <a class="cart text-decoration-none" href="panier.html" aria-label="Visitez votre panier d'achats"
+                    aria-describedby="cartDescription">
+                    <i class="fas fa-shopping-cart fa-2x text-dark p-2"></i>
                     <span class="badge badge-pill badge-dark"></span>
+                    <span id="cartDescription" class="sr-only"> Vous n'avez actuellement aucun article dans votre
+                        panier</span>
                 </a>
             </div>
         </div>
@@ -83,14 +86,15 @@
                     </select>
                 </div>
                 <p id="productPrice" class="lead">Prix : XX,XX€</p>
-                <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au panier</button>
+                <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au
+                    panier</button>
             </article>
 
         </section>
     </main>
 
     <!-- Popup for contact informations -->
-    <div id="productAdded" class="modal-bg">
+    <div role="dialog" aria-labelledby="productAddedTitle" id="productAdded" class="modal-bg">
         <div class="modal text-center rounded-lg">
             <h3 id="productAddedTitle" class="mb-4"></h3>
             <div class="row">
@@ -102,12 +106,25 @@
         </div>
     </div>
 
-    <!-- Popup for contact informations -->
-    <div id="contactUs" class="modal-bg">
+    <!-- popup for brand informations -->
+    <div role="dialog" aria-labelledby="aboutUsTitle" aria-describedby="aboutUsDescription" id="aboutUs"
+        class="modal-bg">
         <div class="modal text-center rounded-lg">
-            <h3>Nous contacter</h3>
+            <h3 id="aboutUsTitle" class="mb-3">Chez Orinoco</h3>
+            <p id="aboutUsDescription">Nous souhaitons nous démarquer des grands site e-commerce en créant des
+                applications thématiques ne
+                vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
+                les vêtements.</p>
+        </div>
+    </div>
+
+    <!-- Popup for contact informations -->
+    <div role="dialog" aria-labelledby="contactUsTitle" aria-describedby="contactUsDescription" id="contactUs"
+        class="modal-bg">
+        <div class="modal text-center rounded-lg">
+            <h3 id="contactUsTitle">Nous contacter</h3>
             <div>
-                <h4 class="mb-3">Orinoco</h4>
+                <h4 id="contactUsDescription" class="mb-3">Voici nos informations de contact</h4>
                 <p>Adresse : 62, rue Isambard, 75000 Paris</p>
                 <p>Téléphone : 02.72.57.63.22</p>
                 <p><a href="mailto:contact@orinoco.fr">contact@orinoco.fr</a></p>
@@ -115,27 +132,13 @@
         </div>
     </div>
 
-    <!-- popup for brand informations -->
-    <div id="aboutUs" class="modal-bg">
-        <div class="modal text-center rounded-lg">
-            <h3>A propos de nous</h3>
-            <div>
-                <h4 class="mb-3">Orinoco</h4>
-                <p>Nous souhaitons nous démarquer des grands site e-commerce en créant des applications thématiques ne
-                    vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
-                    les vêtements.</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer bar -->
-    <footer class="footer  py-3 bg-light container-fluid">
+    <footer class="footer mt-auto py-3 bg-light container-fluid">
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
-                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0 p-2" href="#">A
-                    propos
-                    de nous</a>
-                <a id="contactPopup" aria-label="Nous contacter" class="text-dark my-2 my-sm-0 p-2" href="#">Nous
+                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark p-2 my-2 my-sm-0" href="#">A
+                    propos de nous</a>
+                <a id="contactPopup" aria-label="Nous contacter" class="text-dark p-2 my-2 my-sm-0" href="#">Nous
                     contacter</a>
             </div>
         </div>
@@ -154,6 +157,8 @@
     <!-- Fontawesome kit -->
     <script src="https://kit.fontawesome.com/acd1cf4284.js" crossorigin="anonymous"></script>
 
+    <!-- A11CAST's module for doing modals accessible -->
+    <script src="/node_modules/wicg-inert/dist/inert.min.js"></script>
     <!-- polyfill babel -->
     <script src="/polyfill.bundle.js"></script>
     <!-- script custom -->

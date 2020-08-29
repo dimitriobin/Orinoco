@@ -27,20 +27,19 @@ function showProducts(url, productTheme) {
 
                 article.setAttribute('class', 'mb-3 border w-100');
                 article.innerHTML += `
-                    <a href="pages-html/produits.html?id=${productId}&theme=${productTheme}" class="focus-ring text-dark text-decoration-none" aria-label="Voir la fiche de ce produit">
+                    
                         <div class="row">
-                            <div class="col-12 col-md-5 my-auto">
-                                <img src=${productImg} alt="Une photographie de ${productName}" class="card-img h-100">
-                            </div>
+                                <img src=${productImg} alt="Une photographie de ${productName}" class="card-img h-100 col-12 col-md-5 my-auto">
                             <div class="col-12 col-md-7">
                                 <div class="card-body">
                                     <h3 class="card-title">${productName}</h3>
                                     <p class="card-text mb-1">${productDescription}</p>
                                     <p class="card-text text-muted mb-1">Prix : ${productPrice}</p>
+                                    <a href="pages-html/produits.html?id=${productId}&theme=${productTheme}" class="btn btn-light text-dark mt-3 stretched-link">Voir la fiche de ce produit</a>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    
                 `
                 listOfProducts.appendChild(article);
             }

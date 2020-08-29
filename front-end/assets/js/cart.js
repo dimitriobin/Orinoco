@@ -21,9 +21,9 @@ cartItems = JSON.parse(cartItems);
 if (cartItems) {
     if (cartItems.length > 0) {
         if (cartItems.length === 1) {
-            title.textContent = 'Mon panier (' + cartItems.length + ' article )'
+            title.textContent = 'Mon panier (' + cartItems.length + ' article)'
         } else {
-            title.textContent = 'Mon panier (' + cartItems.length + ' articles )'
+            title.textContent = 'Mon panier (' + cartItems.length + ' articles)'
         }
         displayTotal();
         displayCart();
@@ -59,11 +59,11 @@ function displayCart(product) {
                             </p>
                             <p class="card-text mb-1">Prix : ${convertPrice(product.price)}</p>
                             <div class="d-flex flex-wrap mb-1">
-                                <button type="button" class="plusBtn btn p-0"><i
-                                        class="fas fa-plus" aria-label="Augmenter la quantité de ce produit d'une unité"></i></button>
-                                        <p class="card-text mb-0 mx-2 counter">${product.quantity}</p>
-                                <button type="button" class="minusBtn btn p-0"><i
-                                        class="fas fa-minus" aria-label="Diminuer la quantité de ce produit d'une unité"></i></button>
+                                <button type="button" class="plusBtn btn p-0" aria-label="Augmenter la quantité de une unité"><i
+                                        class="fas fa-plus"></i></button>
+                                        <p class="card-text mb-0 mx-2 counter" aria-live="assertive"><span class="sr-only">La quantité est de </span>${product.quantity}</p>
+                                <button type="button" class="minusBtn btn p-0" aria-label="Diminuer la quantité de une unité"><i
+                                        class="fas fa-minus"></i></button>
                             </div>
                             <button type="button" class="removeBtn btn btn-sm btn-outline-danger">Retirer du panier</button>
                     </div>

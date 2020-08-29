@@ -35,7 +35,10 @@ function setLayout(product) {
             break;
     };
     // put the content in the DOM (in order of appearance)
+    document.querySelector('title').textContent = product.name;
     document.getElementById('productImg').setAttribute('src', product.imageUrl);
+    document.getElementById('productImg').setAttribute('alt', 'Image du produit ' + product.name + ', cliquez dessus pour l\'ouvrir dans un nouvel onglet');
+    document.getElementById('productImg').setAttribute('title', 'Image du produit ' + product.name + ', cliquez dessus pour l\'ouvrir dans un nouvel onglet');
     document.getElementById('productImg').parentNode.setAttribute('href', product.imageUrl);
     document.getElementById('productName').textContent = product.name;
     document.getElementById('productRef').textContent = 'REF : ' + product._id;
@@ -72,9 +75,7 @@ function addToCart(product) {
                 // Si le produit existe déjà dans le panier
                 if (cartItems[i].id === item.id) {
                     // Ajouter la quantité à l'ancienne valeur.
-                    document.getElementById('productAddedTitle').innerHTML += `
-                        <i class="fas fa-check-circle text-success mr-3"></i>La quantité a été changée !
-                    `
+                    document.getElementById('productAddedTitle').textContent = 'La quantité a été changée !';
                     cartItems[i].quantity = parseInt(cartItems[i].quantity);
                     cartItems[i].quantity += parseInt(item.quantity);
                     // Renvoyer les données dans le storage sous forme de STRING
@@ -111,5 +112,5 @@ request(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
         addToCart(product);
-        popup('#addToCartBtn', '#productAdded')
+        popup('addToCartBtn', 'productAdded');
     });
