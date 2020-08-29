@@ -67,6 +67,12 @@ function popup(btn, modal) {
         body.addEventListener('click', function () {
             modalBg.classList.remove('modal-bg-active');
         })
+
+        window.addEventListener('keydown', () => {
+            if (event.key === "Escape") {
+                modalBg.classList.remove('modal-bg-active')
+            }
+        })
     });
 
 

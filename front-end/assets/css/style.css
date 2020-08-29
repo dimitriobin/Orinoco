@@ -1,9 +1,22 @@
+body:focus {
+  border: 2px solid black !important;
+}
+
 .bg-light {
   background-color: #f3e9f1 !important;
 }
 
 .btn-light {
   background-color: #f3e9f1 !important;
+}
+
+.bg-success,
+.btn-success {
+  background-color: rgba(20, 103, 32) !important;
+}
+
+.text-success {
+  color: rgba(20, 103, 32) !important;
 }
 
 .text-dark {
@@ -23,6 +36,12 @@
   caption-side: top !important;
   font-size: 1.6rem;
 }
+
+.custom-select {
+  color: black !important;
+}
+
+
 
 .modal-bg {
   position: fixed;

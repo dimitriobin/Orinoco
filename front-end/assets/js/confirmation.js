@@ -23,8 +23,8 @@ productsOrdered = JSON.parse(productsOrdered);
     refList.innerHTML +=
         `
         <tr>
-            <th scope="col">${date}</td>
-            <td class="text-break orderID">${orderInformations.orderId}</td>
+            <td class="text-break">${date}</td>
+            <td class="text-break">${orderInformations.orderId}</td>
         </tr>
     `
 })();
