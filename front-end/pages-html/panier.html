@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column justify-content-between vh-100">
     <!-- Navigation bar -->
     <header class="container-fluid bg-light py-4">
         <div class="container">
@@ -51,11 +51,11 @@
     </header>
 
     <!-- Main content -->
-    <main class="container bg-light p-4 my-4">
-        <div class="row no-gutters justify-content-between">
+    <main class="container bg-light p-4 my-4 rounded-lg">
+        <div id="orderReview" class="row no-gutters justify-content-between">
             <!-- Order details -->
-            <section id="productsReview" class="bg-white p-4 mb-4 col-12">
-                <h1 id="cartTitle" class="mb-5">Mon panier</h1>
+            <section id="productsReview" class="bg-white p-4 mb-4 col-12 rounded-lg">
+                <h1 id="cartTitle" class="mb-5 text-center"></h1>
                 <!-- Product template
                 <article class="card mb-3 border-0">
                     <div class="row no-gutters w-100">
@@ -83,7 +83,7 @@
             </section>
 
             <!-- Total -->
-            <section class="bg-white p-4 mb-4 col-12 h-25">
+            <!-- <section class="bg-white p-4 mb-4 col-12 h-25">
                 <h2>Total</h2>
                 <table class="table table-borderless table-striped ">
                     <caption class="sr-only">Sous-total</caption>
@@ -96,38 +96,43 @@
                         </tr>
                     </tfoot>
                 </table>
-            </section>
+            </section> -->
         </div>
 
         <!-- Form -->
-        <section class="bg-white p-4">
+        <section id="formSection" class="bg-white p-4 d-none  rounded-lg">
             <h2>Finalisez votre commande</h2>
             <div class="w-75 mx-auto">
-                <form action="" id="contact" class="mt-4" name="contact">
+                <form id="contact" class="mt-4" name="contact" novalidate>
                     <div class="form-group row justify-content-between no-gutters">
-                        <label for="first" class="col-md-2 col-form-label">Prénom : </label>
-                        <input type="text" name="firstName" id="firstName" class="form-control col-md-10"
-                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
+                        <label for="firstName" class="col-md-2 col-form-label">Prénom : </label>
+                        <input type="text" name="firstName" id="firstName" class="form-control col-md-10 px-3"
+                            pattern="^[A-Za-zÀ-ÿ .-]+$" placeholder="John" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
-                        <label for="last" class="col-md-2 col-form-label">Nom : </label>
-                        <input type="text" name="lastName" id="lastName" class="form-control col-md-10"
-                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
+                        <label for="lastName" class="col-md-2 col-form-label">Nom : </label>
+                        <input type="text" name="lastName" id="lastName" class="form-control col-md-10 px-3"
+                            pattern="^[A-Za-zÀ-ÿ .-]+$" placeholder="Doe" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="address" class="col-md-2 col-form-label">Adresse : </label>
-                        <input type="text" name="address" id="address" class="form-control col-md-10"
-                            pattern="([0-9]*) ?([a-zàâçéèêëîïôûùüÿñæœ .-]*)" required>
+                        <input type="text" name="address" id="address" class="form-control col-md-10 px-3"
+                            pattern="^([0-9]{1,4})\s([ A-Za-zÀ-ÿ0-9-'])+$" placeholder="111 rue d'Alésia" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="city" class="col-md-2 col-form-label">Ville : </label>
-                        <input type="text" name="city" id="city" class="form-control col-md-10"
-                            pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]*$" required>
+                        <input type="text" name="city" id="city" class="form-control col-md-10 px-3"
+                            pattern="^[A-Za-zÀ-ÿ .-]+$" placeholder="Paris" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
-                        <label for="mail" class="col-md-2 col-form-label">E-mail : </label>
-                        <input type="email" name="email" id="email" class="form-control col-md-10"
-                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+                        <label for="email" class="col-md-2 col-form-label">E-mail : </label>
+                        <input type="email" name="email" id="email" class="form-control col-md-10 px-3"
+                            pattern="^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$" placeholder="johndoe@gmail.com" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <button type="submit" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
                 </form>
@@ -170,7 +175,7 @@
     </div>
 
     <!-- Footer bar -->
-    <footer class="footer mt-auto py-3 bg-light container-fluid">
+    <footer class="footer py-3 bg-light container-fluid">
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
                 <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos
