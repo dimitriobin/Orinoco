@@ -45,12 +45,10 @@ productsOrdered = JSON.parse(productsOrdered);
     for (let j = 0; j < products.length; j++) {
         const element = products[j];
         articlesOrdered.innerHTML += `
-        <article class="card mb-3 border">
+        <article class="card mb-4 border">
             <div class="row no-gutters w-100">
-                <div class="col-md-4 my-auto">
-                    <img src="${element.imgUrl}" alt="" class="card-img">
-                </div>
-                <div class="col-md-8">
+                <img src="${element.imgUrl}" alt="" class="h-100 card-img col-12 col-md-5 my-auto">
+                <div class="col-12 col-md-7">
                     <div class="card-body">
                         <h3 class="card-title">${element.name}</h5>
                             <p class="card-text mb-0"><small class="text-muted">ref :
@@ -68,6 +66,6 @@ productsOrdered = JSON.parse(productsOrdered);
     }
     let totalOutput = document.createElement('p')
     totalOutput.innerHTML = `Prix total de votre commande : ${convertPrice(total)}`;
-    totalOutput.setAttribute('class', 'lead font-weight-bold');
+    totalOutput.setAttribute('class', 'lead font-weight-bold mt-4');
     articlesOrdered.parentNode.appendChild(totalOutput);
 })()

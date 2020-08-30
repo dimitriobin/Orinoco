@@ -54,40 +54,45 @@
     </header>
 
     <main class="container py-5 my-auto">
-        <section class="row flex-column flex-md-row justify-content-between align-items-center border p-3 my-5">
-            <article class="col-12 col-md-5 mb-5 mb-md-0">
-                <a href="" class="stretched-link" target="_blank"><img id="productImg" src="" alt=""
-                        class="img-responsive"></a>
-            </article>
-            <article class="col-12 col-md-6 text-break">
-                <h1 id="productName">Nom du produit</h1>
-                <p id="productRef" class="text-muted"><small>ref : f4d65s4f5d6s4f5d6s4fd6s5f45ds64fd56s</small></p>
-                <p id="productDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto a qui dolorum
-                    laborum eius
-                    explicabo illo, voluptates vitae aut autem amet corrupti sed obcaecati animi quidem eligendi cum,
-                    voluptas quae?</p>
-                <div class="form-row align-items-center mb-3">
-                    <label id="productOptions" class="col-auto mr-sm-2" for="inlineFormCustomSelect">Options : </label>
-                    <select id="inlineFormCustomSelect" class="col-4 custom-select mr-sm-2"></select>
+        <section class="row flex-column flex-md-row justify-content-between align-items-center border my-auto">
+            <a href="" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="" alt=""
+                    class="card-img"></a>
+            <article class="col-12 col-md-7 text-break">
+                <div class="card-body">
+                    <h1 id="productName" class="card-title">Nom du produit</h1>
+                    <p id="productRef" class="text-muted card-subtitle"><small>ref :
+                            f4d65s4f5d6s4f5d6s4fd6s5f45ds64fd56s</small></p>
+                    <p id="productDesc" class="card-text ">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Architecto a qui
+                        dolorum
+                        laborum eius
+                        explicabo illo, voluptates vitae aut autem amet corrupti sed obcaecati animi quidem eligendi
+                        cum,
+                        voluptas quae?</p>
+                    <div class="form-row align-items-center mb-3">
+                        <label id="productOptions" class="col-auto mr-sm-2" for="inlineFormCustomSelect">Options :
+                        </label>
+                        <select id="inlineFormCustomSelect" class="col-4 custom-select mr-sm-2"></select>
+                    </div>
+                    <div class="form-row align-items-center mb-3">
+                        <label class="col-auto" for="quantity">Quantité : </label>
+                        <select class="col-2 custom-select" name="" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <p id="productPrice" class="lead">Prix : XX,XX€</p>
+                    <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au
+                        panier</button>
                 </div>
-                <div class="form-row align-items-center mb-3">
-                    <label class="col-auto" for="quantity">Quantité : </label>
-                    <select class="col-2 custom-select" name="" id="quantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <p id="productPrice" class="lead">Prix : XX,XX€</p>
-                <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au
-                    panier</button>
             </article>
 
         </section>
