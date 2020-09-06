@@ -21,9 +21,9 @@ cartItems = JSON.parse(cartItems);
 if (cartItems) {
     if (cartItems.length > 0) {
         if (cartItems.length === 1) {
-            title.textContent = 'Mon panier (' + cartItems.length + ' article )'
+            title.textContent = 'Mon panier (' + cartItems.length + ' article)'
         } else {
-            title.textContent = 'Mon panier (' + cartItems.length + ' articles )'
+            title.textContent = 'Mon panier (' + cartItems.length + ' articles)'
         }
         displayTotal();
         displayCart();
@@ -36,10 +36,13 @@ if (cartItems) {
 }
 
 function displayCart(product) {
+    let productsReview = document.getElementById('productsReview');
+    let listOfProductsTitle = document.createElement('h2');
+    listOfProductsTitle.textContent = 'Liste de vos produits';
+    productsReview.appendChild(listOfProductsTitle);
     for (let i = 0; i < cartItems.length; i++) {
         const product = cartItems[i];
         // Add the product in the first section
-        let productsReview = document.getElementById('productsReview');
         productsReview.innerHTML += `
         <article class="card mb-3 border">
             <div class="row no-gutters w-100">
@@ -56,10 +59,10 @@ function displayCart(product) {
                             </p>
                             <p class="card-text mb-1">Prix : ${convertPrice(product.price)}</p>
                             <div class="d-flex flex-wrap mb-1">
-                                <button type="button" class="plusBtn btn p-0"><i
+                                <button type="button" class="plusBtn btn p-0" aria-label="Augmenter la quantité de une unité"><i
                                         class="fas fa-plus"></i></button>
-                                        <p class="card-text mb-0 mx-2">${product.quantity}</p>
-                                <button type="button" class="minusBtn btn p-0"><i
+                                        <p class="card-text mb-0 mx-2 counter" aria-live="assertive"><span class="sr-only">La quantité est de </span>${product.quantity}</p>
+                                <button type="button" class="minusBtn btn p-0" aria-label="Diminuer la quantité de une unité"><i
                                         class="fas fa-minus"></i></button>
                             </div>
                             <button type="button" class="removeBtn btn btn-sm btn-outline-danger">Retirer du panier</button>
@@ -110,8 +113,10 @@ function displayTotal() {
 // Set the +1 and -1 button
 let plusBtn = document.querySelectorAll('.plusBtn');
 let minusBtn = document.querySelectorAll('.minusBtn');
+let counter = document.querySelectorAll('.counter')
 plusBtn.forEach(function (element, index, array) {
-    plusBtn[index].addEventListener('click', function () {
+    plusBtn[index].addEventListener('click', function (e) {
+        e.preventDefault();
         cartItems[index].quantity = parseInt(cartItems[index].quantity, 10);
         cartItems[index].quantity += 1;
         localStorage.setItem('cartItems', JSON.stringify(cartItems));

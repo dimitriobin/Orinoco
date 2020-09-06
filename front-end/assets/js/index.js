@@ -26,7 +26,21 @@ function showProducts(url, productTheme) {
                 let productId = datas[i]._id
 
                 article.setAttribute('class', 'mb-3 border w-100');
-                article.innerHTML = '<div class="row"><div class="col-12 col-md-5 my-auto"><img src=' + productImg + ' alt="Une photographie de ' + productName + '" class="card-img h-100"></div><div class="col-12 col-md-7"><div class="card-body"><h3 class="card-title">' + productName + '</h5><p class="card-text mb-1">' + productDescription + '</p><p class="card-text text-muted mb-1">Prix : ' + productPrice + '</p><a href="pages-html/produits.html?id=' + productId + '&theme=' + productTheme + '" class="stretched-link" aria-label="Voir la fiche de ce produit"></div></div></div>';
+                article.innerHTML += `
+                    
+                        <div class="row">
+                                <img src=${productImg} alt="Une photographie de ${productName}" class="card-img h-100 col-12 col-md-5 my-auto">
+                            <div class="col-12 col-md-7">
+                                <div class="card-body">
+                                    <h3 class="card-title">${productName}</h3>
+                                    <p class="card-text mb-1">${productDescription}</p>
+                                    <p class="card-text text-muted mb-1">Prix : ${productPrice}</p>
+                                    <a href="pages-html/produits.html?id=${productId}&theme=${productTheme}" class="btn btn-light text-dark mt-3 stretched-link">Voir la fiche de ce produit</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                `
                 listOfProducts.appendChild(article);
             }
         });

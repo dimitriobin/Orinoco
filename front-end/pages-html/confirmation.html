@@ -37,14 +37,17 @@
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
                 <a href="../index.html" aria-label="Retournez sur la page principale">
-                    <img class="img-responsive"
+                    <img class="img-responsive p-2"
                         srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
                         sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
-                <a class="cart" href="panier.html">
-                    <i class="fas fa-shopping-cart fa-2x text-dark" aria-label="Visitez votre panier d'achats"></i>
+                <a class="cart text-decoration-none" href="panier.html" aria-label="Visitez votre panier d'achats"
+                    aria-describedby="cartDescription">
+                    <i class="fas fa-shopping-cart fa-2x text-dark p-2"></i>
                     <span class="badge badge-pill badge-dark"></span>
+                    <span id="cartDescription" class="sr-only"> Vous n'avez actuellement aucun article dans votre
+                        panier</span>
                 </a>
             </div>
         </div>
@@ -61,8 +64,8 @@
                     <caption class="table_caption--up text-dark">Référence de votre commande :</caption>
                     <thead>
                         <tr class="font-weight-bold">
-                            <th>date</th>
-                            <th>référence</th>
+                            <th scope="row">date</th>
+                            <th scope="row">référence</th>
                         </tr>
                     </thead>
                     <tbody id="refList">
@@ -77,7 +80,7 @@
 
             <!-- products list -->
             <section class="bg-white p-4 col-12">
-                <h3>Le(s) produit(s) que vous avez commandé(s) :</h3>
+                <h3 class="mb-4">Le(s) produit(s) que vous avez commandé(s) :</h3>
                 <div id="articlesOrdered">
                     <!-- Product template
                     <article class="card mb-3 border-0">
@@ -109,28 +112,28 @@
         </section>
     </main>
 
-    <!-- Popup for contact informations -->
-    <div id="contactUs" class="modal-bg">
-        <div class="modal p-3 text-center rounded-lg">
-            <h3>Nous contacter</h3>
-            <div>
-                <h4 class="mb-3">Orinoco</h4>
-                <p>Adresse : 62, rue Isambard, 75000 Paris</p>
-                <p>Téléphone : 02.72.57.63.22</p>
-                <p><a href="mailto:contact@orinoco.fr">contact@orinoco.fr</a></p>
-            </div>
+    <!-- popup for brand informations -->
+    <div role="dialog" aria-labelledby="aboutUsTitle" aria-describedby="aboutUsDescription" id="aboutUs"
+        class="modal-bg">
+        <div class="modal text-center rounded-lg">
+            <h3 id="aboutUsTitle" class="mb-3">Chez Orinoco</h3>
+            <p id="aboutUsDescription">Nous souhaitons nous démarquer des grands site e-commerce en créant des
+                applications thématiques ne
+                vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
+                les vêtements.</p>
         </div>
     </div>
 
-    <!-- popup for brand informations -->
-    <div id="aboutUs" class="modal-bg">
-        <div class="modal p-3 text-center rounded-lg">
-            <h3>A propos de nous</h3>
+    <!-- Popup for contact informations -->
+    <div role="dialog" aria-labelledby="contactUsTitle" aria-describedby="contactUsDescription" id="contactUs"
+        class="modal-bg">
+        <div class="modal text-center rounded-lg">
+            <h3 id="contactUsTitle">Nous contacter</h3>
             <div>
-                <h4 class="mb-3">Orinoco</h4>
-                <p>Nous souhaitons nous démarquer des grands site e-commerce en créant des applications thématiques ne
-                    vendant qu’un seul groupe de produits. Il y a par exemple Oribook pour les livres ou Oritextil pour
-                    les vêtements.</p>
+                <h4 id="contactUsDescription" class="mb-3">Voici nos informations de contact</h4>
+                <p>Adresse : 62, rue Isambard, 75000 Paris</p>
+                <p>Téléphone : 02.72.57.63.22</p>
+                <p><a href="mailto:contact@orinoco.fr">contact@orinoco.fr</a></p>
             </div>
         </div>
     </div>
@@ -139,9 +142,9 @@
     <footer class="footer mt-auto py-3 bg-light container-fluid">
         <div class="container">
             <div class="row flex-column flex-md-row justify-content-between align-items-center">
-                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark my-2 my-sm-0" href="#">A propos
-                    de nous</a>
-                <a id="contactPopup" aria-label="Nous contacter" class="text-dark my-2 my-sm-0" href="#">Nous
+                <a id="aboutPopup" aria-label="En savoir plus sur nous" class="text-dark p-2 my-2 my-sm-0" href="#">A
+                    propos de nous</a>
+                <a id="contactPopup" aria-label="Nous contacter" class="text-dark p-2 my-2 my-sm-0" href="#">Nous
                     contacter</a>
             </div>
         </div>
@@ -160,6 +163,9 @@
     <!-- Fontawesome kit -->
     <script src="https://kit.fontawesome.com/acd1cf4284.js" crossorigin="anonymous"></script>
 
+
+    <!-- A11CAST's module for doing modals accessible -->
+    <script src="/node_modules/wicg-inert/dist/inert.min.js"></script>
     <!-- script custom -->
     <script src="/polyfill.bundle.js"></script>
     <script src="/confirmation.bundle.js"></script>

@@ -136,6 +136,11 @@ form.addEventListener('submit', function (e) {
         .then(function () {
             let modalBg = document.querySelector('#confirmation')
             modalBg.classList.add('modal-bg-active');
+            Array.from(document.body.children).forEach(child => {
+                if (child !== modalBg) {
+                    child.inert = true;
+                }
+            })
             let confirmPopup = document.querySelector('#confirmation div');
             confirmPopup.innerHTML += `
                 <h3>Votre commande est validée</h3>

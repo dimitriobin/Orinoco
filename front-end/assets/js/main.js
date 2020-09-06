@@ -33,6 +33,7 @@ function onLoadCartNumbers() {
     productNumber = JSON.parse(productNumber);
     if (productNumber) {
         document.querySelector('.cart span').textContent = productNumber.length;
+        document.getElementById('cartDescription').textContent = 'Vous avez actuellement ' + productNumber.length + 'articles dans votre panier';
     }
 }
 // initialize it
@@ -57,26 +58,55 @@ function convertPrice(input) {
 // popup function
 function popup(btn, modal) {
     let body = document.querySelector('body');
-    let modalBtn = document.querySelector(btn);
-    let modalBg = document.querySelector(modal)
+    let modalBtn = document.getElementById(btn);
+    let modalBg = document.getElementById(modal);
+    let focusOn = modalBg.children[0].children[0];
+    let previousActiveElement;
 
     modalBtn.addEventListener('click', function (e) {
         e.stopPropagation()
+
+        previousActiveElement = document.activeElement;
+
+        Array.from(document.body.children).forEach(child => {
+            if (child !== modalBg) {
+                child.inert = true;
+            }
+        })
         modalBg.classList.add('modal-bg-active');
 
         body.addEventListener('click', function () {
             modalBg.classList.remove('modal-bg-active');
+            Array.from(document.body.children).forEach(child => {
+                if (child !== modalBg) {
+                    child.inert = false;
+                }
+            })
+            previousActiveElement.focus();
+
         })
-    });
 
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                modalBg.classList.remove('modal-bg-active')
+                Array.from(document.body.children).forEach(child => {
+                    if (child !== modalBg) {
+                        child.inert = false;
+                    }
+                })
+                previousActiveElement.focus();
+            }
+        })
 
+        modalBg.querySelector('.modal').focus();
+    })
 }
 
 // Informations pour le contact dans le footer
-popup('#aboutPopup', '#aboutUs');
+popup('aboutPopup', 'aboutUs');
 
 // Informations pour le 'a propos'' dans le footer
-popup('#contactPopup', '#contactUs');
+popup('contactPopup', 'contactUs');
 
 export {
     teddiesAPI,
