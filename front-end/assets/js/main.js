@@ -56,57 +56,56 @@ function convertPrice(input) {
 }
 
 // popup function
-function popup(btn, modal) {
+function popup(e, modal) {
     let body = document.querySelector('body');
-    let modalBtn = document.getElementById(btn);
     let modalBg = document.getElementById(modal);
-    let focusOn = modalBg.children[0].children[0];
     let previousActiveElement;
 
-    modalBtn.addEventListener('click', function (e) {
-        e.stopPropagation()
+    e.stopPropagation();
 
-        previousActiveElement = document.activeElement;
+    modalBg.querySelector('.modal').focus();
+    previousActiveElement = document.activeElement;
 
+    Array.from(document.body.children).forEach(child => {
+        if (child !== modalBg) {
+            child.inert = true;
+        }
+    });
+    modalBg.classList.add('modal-bg-active');
+
+    body.addEventListener('click', function () {
+        modalBg.classList.remove('modal-bg-active');
         Array.from(document.body.children).forEach(child => {
             if (child !== modalBg) {
-                child.inert = true;
+                child.inert = false;
             }
-        })
-        modalBg.classList.add('modal-bg-active');
+        });
+        previousActiveElement.focus();
+    });
 
-        body.addEventListener('click', function () {
+    window.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
             modalBg.classList.remove('modal-bg-active');
             Array.from(document.body.children).forEach(child => {
                 if (child !== modalBg) {
                     child.inert = false;
                 }
-            })
+            });
             previousActiveElement.focus();
+        }
+    });
 
-        })
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
-                modalBg.classList.remove('modal-bg-active')
-                Array.from(document.body.children).forEach(child => {
-                    if (child !== modalBg) {
-                        child.inert = false;
-                    }
-                })
-                previousActiveElement.focus();
-            }
-        })
-
-        modalBg.querySelector('.modal').focus();
-    })
 }
 
 // Informations pour le contact dans le footer
-popup('aboutPopup', 'aboutUs');
+document.getElementById('aboutPopup').addEventListener('click', function (e) {
+    popup(e, 'aboutUs');
+});
 
 // Informations pour le 'a propos'' dans le footer
-popup('contactPopup', 'contactUs');
+document.getElementById('contactPopup').addEventListener('click', function (e) {
+    popup(e, 'contactUs');
+});
 
 export {
     teddiesAPI,

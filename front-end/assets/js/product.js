@@ -112,5 +112,7 @@ request(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
         addToCart(product);
-        popup('addToCartBtn', 'productAdded');
+        document.getElementById('addToCartBtn').addEventListener('click', function (e) {
+            popup(e, 'productAdded');
+        });
     });

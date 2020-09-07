@@ -7,6 +7,7 @@ import {
 } from './main';
 
 let form = document.getElementById('contact');
+let submitRequest = document.getElementById('submitRequest');
 // Récupérer les données du panier
 let cartItems = localStorage.getItem('cartItems');
 cartItems = JSON.parse(cartItems);
@@ -121,31 +122,21 @@ function formValidation() {
             }
         });
     }
-
 };
 
 
 
-form.addEventListener('submit', function (e) {
+submitRequest.addEventListener('click', function (e) {
+    e.preventDefault();
     formValidation();
+
     let requestBody = order();
-    request(camerasOrderAPI, 'POST', 'text', requestBody, 'application/json')
+    request('http://localhost:3000/api/teddies/order', 'POST', 'text', requestBody, 'application/json')
         .then((response) => {
             orderStorage(response)
         })
         .then(function () {
-            let modalBg = document.querySelector('#confirmation')
-            modalBg.classList.add('modal-bg-active');
-            Array.from(document.body.children).forEach(child => {
-                if (child !== modalBg) {
-                    child.inert = true;
-                }
-            })
-            let confirmPopup = document.querySelector('#confirmation div');
-            confirmPopup.innerHTML += `
-                <h3>Votre commande est validée</h3>
-                <p>Vous allez être redirigé vers une page de confirmation de commande !</p>
-            `
+            popup(e, 'confirmation');
             // Reset le panier
             localStorage.removeItem('cartItems');
             // Lancer la redirection après 4s
@@ -154,5 +145,4 @@ form.addEventListener('submit', function (e) {
             }, 4000);
         })
         .catch(function (error) {});
-    e.preventDefault();
 });
