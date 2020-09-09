@@ -93,81 +93,60 @@ function orderStorage(orderArray) {
 // Create a client side validation of the submission datas
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function formValidation() {
-    let firstName = document.getElementById('firstName');
-    const firstNameValidation = /^[A-Za-zÀ-ÿ .-]+$/;
+(function formValidationLive() {
 
-    let lastName = document.querySelector('#lastName');
-    const lastNameValidation = /^[A-Za-zÀ-ÿ .-]+$/;
+    let validationBtn = document.getElementById('validationBtn');
+    let inputs = document.querySelectorAll('#contact input');
+    let validInputCounter = 0;
 
-    let address = document.querySelector('#address');
-    const addressValidation = /^([0-9]{1,4})\s([ A-Za-zÀ-ÿ0-9-'])+$/;
-    // /^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9-']*$/;
-
-    let city = document.querySelector('#city');
-    const cityValidation = /^[A-Za-zÀ-ÿ .-]+$/;
-
-    let email = document.querySelector('#email');
-    const emailValidation = /^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$/;
-    if (!firstNameValidation.test(firstName.value)) {
-        firstName.nextElementSibling.innerHTML = 'Veuillez entrez votre prénom au bon format.';
-        firstName.nextElementSibling.className = 'error active';
-
-        firstName.addEventListener('input', () => {
-            if (firstNameValidation.test(firstName.value)) {
-                firstName.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-                firstName.nextElementSibling.className = 'error';
-            }
-        });
+    function toUpperCase(input) {
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+        })
     }
 
-    if (!lastNameValidation.test(lastName.value)) {
-        lastName.nextElementSibling.innerHTML = 'Veuillez entrez votre nom au bon format.';
-        lastName.nextElementSibling.className = 'error active';
-
-        lastName.addEventListener('input', () => {
-            if (lastNameValidation.test(lastName.value)) {
-                lastName.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-                lastName.nextElementSibling.className = 'error';
-            }
-        });
+    function toLowerCase(input) {
+        input.addEventListener('input', () => {
+            input.value = input.value.toLowerCase();
+        })
     }
 
-    if (!addressValidation.test(address.value)) {
-        address.nextElementSibling.innerHTML = 'Veuillez entrez votre adresse au bon format.';
-        address.nextElementSibling.className = 'error active';
-
-        address.addEventListener('input', () => {
-            if (addressValidation.test(address.value)) {
-                address.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-                address.nextElementSibling.className = 'error';
-            }
-        });
+    function validation(input, regEx) {
+        if (!regEx.test(input.value)) {
+            input.nextElementSibling.innerHTML = 'Veuillez entrez votre prénom au bon format.';
+            input.nextElementSibling.className = 'error active';
+            (validInputCounter > 0) ? validInputCounter-- : validInputCounter = 0;
+        } else {
+            input.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+            input.nextElementSibling.className = 'error';
+            (validInputCounter >= 0 && validInputCounter < 5) ? validInputCounter++ : validInputCounter = 5;
+        }
     }
 
-    if (!cityValidation.test(city.value)) {
-        city.nextElementSibling.innerHTML = 'Veuillez entrez votre ville au bon format.';
-        city.nextElementSibling.className = 'error active';
+    toUpperCase(firstName);
+    toUpperCase(lastName);
+    toUpperCase(city);
+    toLowerCase(email);
 
-        city.addEventListener('input', () => {
-            if (cityValidation.test(city.value)) {
-                city.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-                city.nextElementSibling.className = 'error';
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            let regEx = new RegExp(input.getAttribute('pattern'));
+            validation(input, regEx);
+            console.log(validInputCounter);
+            if (validInputCounter == 5) {
+                validationBtn.setAttribute('class', 'd-none');
+                submitRequest.classList.remove('d-none');
             }
-        });
-    }
+        })
+    })
+})();
 
-    if (!emailValidation.test(email.value)) {
-        email.nextElementSibling.innerHTML = 'Veuillez entrez votre e-mail au bon format.';
-        email.nextElementSibling.className = 'error active';
 
-        email.addEventListener('input', () => {
-            if (emailValidation.test(email.value)) {
-                email.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-                email.nextElementSibling.className = 'error';
-            }
-        });
-    }
+function formValidationPostClick() {
+
+
+
+
 };
 
 
@@ -178,7 +157,7 @@ function formValidation() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 submitRequest.addEventListener('click', function (e) {
     e.preventDefault();
-    formValidation();
+    formValidationPostClick();
 
     let contact = makeContactObject();
     let responsesArray = []
