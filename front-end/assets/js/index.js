@@ -11,8 +11,8 @@ let camerasBtn = document.getElementById('oriCameras');
 let furnituresBtn = document.getElementById('oriFurnitures');
 
 // How to throw the list in the DOM 
-function showProducts(url, productTheme) {
-    request(url, 'GET', 'json')
+function showProducts(productTheme) {
+    request(productTheme, 'GET', 'json')
         .then(function (datas) {
             console.log(datas);
             let listOfProducts = document.querySelector('#listOfProdutcs');
@@ -48,11 +48,11 @@ function showProducts(url, productTheme) {
 
 // Event on theme's buttons
 teddiesBtn.addEventListener('click', function () {
-    showProducts(teddiesAPI, 'teddies');
+    showProducts('teddies');
 });
 camerasBtn.addEventListener('click', function () {
-    showProducts(camerasAPI, 'cameras');
+    showProducts('cameras');
 });
 furnituresBtn.addEventListener('click', function () {
-    showProducts(furnitureAPI, 'furniture');
+    showProducts('furniture');
 });

@@ -7,10 +7,10 @@ const camerasOrderAPI = 'http://localhost:3000/api/cameras/order';
 const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
 
 // XHR method
-function request(url, method, responseType, sendData, contentType) {
+function request(theme, method, responseType, sendData, contentType) {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
-        xhr.open(method, url);
+        xhr.open(method, `http://localhost:3000/api/${theme}`);
         xhr.responseType = responseType;
         xhr.setRequestHeader('Content-Type', contentType);
         xhr.onload = function () {

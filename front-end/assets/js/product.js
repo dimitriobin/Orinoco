@@ -13,7 +13,7 @@ import {
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 const productTheme = params.get('theme');
-const productUrl = 'http://localhost:3000/api/' + productTheme + '/' + productId;
+const productUrl = `${productTheme}/${productId}`;
 let addToCartBtn = document.getElementById('addToCartBtn');
 
 
