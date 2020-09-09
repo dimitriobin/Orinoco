@@ -10,8 +10,8 @@ import {
     convertPrice
 } from './main.js';
 
-let orderInformations = localStorage.getItem('orders');
-orderInformations = JSON.parse(orderInformations);
+let ordersInformation = localStorage.getItem('ordersInformation');
+ordersInformation = JSON.parse(ordersInformation);
 let productsOrdered = localStorage.getItem('productsOrdered');
 productsOrdered = JSON.parse(productsOrdered);
 
@@ -19,22 +19,24 @@ productsOrdered = JSON.parse(productsOrdered);
     let refList = document.getElementById('refList');
     let date = new Date();
     date = date.toLocaleString(date);
-
-    refList.innerHTML +=
-        `
+    ordersInformation.forEach(shop => {
+        refList.innerHTML +=
+            `
         <tr>
+            <td class="text-break">${shop.theme}</td>
             <td class="text-break">${date}</td>
-            <td class="text-break">${orderInformations.orderId}</td>
+            <td class="text-break">${shop.orderId}</td>
         </tr>
-    `
+        `
+    })
 })();
 
 (function displayClientReferences() {
     let clientReferences = document.getElementById('clientReferences');
     clientReferences.innerHTML += `
-        <p>Merci <span class="font-weight-bold">${orderInformations.contact.firstName}</span> <span class="font-weight-bold">${orderInformations.contact.lastName}</span> d'avoir commandé chez Orinoco !</p>
-        <p>Un mail de confirmation vous sera envoyé à <span class="font-weight-bold">${orderInformations.contact.email}</span> contenant le récapitulatif de
-        votre commande et les informations de livraison à votre adresse <span class="font-weight-bold">${orderInformations.contact.address}</span> à <span class="font-weight-bold">${orderInformations.contact.city}</span>.</p>
+        <p>Merci <span class="font-weight-bold">${ordersInformation[0].contact.firstName}</span> <span class="font-weight-bold">${ordersInformation[0].contact.lastName}</span> d'avoir commandé chez Orinoco !</p>
+        <p>Un mail de confirmation vous sera envoyé à <span class="font-weight-bold">${ordersInformation[0].contact.email}</span> contenant le récapitulatif de
+        votre commande et les informations de livraison à votre adresse <span class="font-weight-bold">${ordersInformation[0].contact.address}</span> à <span class="font-weight-bold">${ordersInformation[0].contact.city}</span>.</p>
     `
 })();
 

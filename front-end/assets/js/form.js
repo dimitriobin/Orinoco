@@ -79,7 +79,10 @@ function makeContactObject() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function orderStorage(orderArray) {
+    console.log(orderArray);
     localStorage.setItem('ordersInformation', JSON.stringify(orderArray));
+    // Transfert products in an other storage
+    localStorage.setItem('productsOrdered', localStorage.getItem('cartItems'));
     // Reset le panier
     localStorage.removeItem('cartItems');
 }
@@ -191,7 +194,9 @@ submitRequest.addEventListener('click', function (e) {
         body = JSON.stringify(body);
         request(`${shop}/order`, 'POST', 'text', body, 'application/json')
             .then(res => {
-                responsesArray.push(JSON.parse(res));
+                res = JSON.parse(res);
+                res['theme'] = shop;
+                responsesArray.push(res);
                 if (responsesArray.length == Object.keys(sortedOrder).length) {
                     orderStorage(responsesArray);
                     popup(e, 'confirmation');
