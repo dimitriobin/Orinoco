@@ -116,9 +116,17 @@ function orderStorage(orderArray) {
 
     // test if the input value is fitting with its regular expression
     function validation(input, regEx) {
+        // traductor express
+        let traductor = {
+            firstName: 'prénom',
+            lastName: 'nom',
+            address: 'adresse',
+            city: 'ville',
+            email: 'e-mail',
+        }
         // if not, display a small message to let the client know what's going wrong
         if (!regEx.test(input.value)) {
-            input.nextElementSibling.innerHTML = 'Veuillez entrez votre prénom au bon format.';
+            input.nextElementSibling.innerHTML = 'Veuillez entrez votre ' + traductor[`${input.getAttribute('id')}`] + ' au bon format.';
             input.nextElementSibling.className = 'error active';
             // also, remove the input to the validInputs array
             if (validInputs.includes(input)) {
