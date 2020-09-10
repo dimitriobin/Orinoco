@@ -1,7 +1,11 @@
+/* General rules*/
+
 body:focus {
   border: 2px solid black !important;
 }
 
+
+/* Bootstrap overwritting */
 .bg-light {
   background-color: #f3e9f1 !important;
 }
@@ -23,6 +27,8 @@ body:focus {
   color: black !important;
 }
 
+
+/* Utility classes */
 .img-responsive {
   max-width: 100%;
   height: auto;
@@ -42,7 +48,7 @@ body:focus {
 }
 
 
-
+/* Modal classes */
 .modal-bg {
   position: fixed;
   width: 100%;
@@ -76,6 +82,7 @@ body:focus {
   padding: 2rem;
 }
 
+/* visual indicators for form validation */
 form input:focus:invalid {
   border: 2px solid red;
 }

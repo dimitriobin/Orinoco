@@ -6,8 +6,10 @@ const teddiesOrderAPI = 'http://localhost:3000/api/teddies/order';
 const camerasOrderAPI = 'http://localhost:3000/api/cameras/order';
 const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
 
-// XHR method
-function request(theme, method, responseType, sendData, contentType) {
+//////////////////////////////////////
+// XHR method for GET and POST methods
+//////////////////////////////////////
+function getProductDatas(theme, method, responseType, sendData, contentType) {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
         xhr.open(method, `http://localhost:3000/api/${theme}`);
@@ -26,8 +28,9 @@ function request(theme, method, responseType, sendData, contentType) {
         xhr.send(sendData);
     })
 }
-
+/////////////////////////////////////////////////////////////////////
 // Display the number of product in the header (aside the cart icon)
+/////////////////////////////////////////////////////////////////////
 function onLoadCartNumbers() {
     let productNumber = localStorage.getItem('cartItems');
     productNumber = JSON.parse(productNumber);
@@ -35,11 +38,12 @@ function onLoadCartNumbers() {
         document.querySelector('.cart span').textContent = productNumber.length;
         document.getElementById('cartDescription').textContent = 'Vous avez actuellement ' + productNumber.length + 'articles dans votre panier';
     }
-}
-// initialize it
+};
 onLoadCartNumbers();
 
-// Permet de convertir la chaine de charactere pour une meilleure lisibilté du prix
+////////////////////////////////////////////////////////////////////////////////////
+// take a price in centimes in input and put this price in the format "xx.xx€" in output
+//////////////////////////////////////////////////////////////////////////////////////
 function convertPrice(input) {
     let price = JSON.stringify(input);
     let output
@@ -55,7 +59,9 @@ function convertPrice(input) {
     }
 }
 
-// popup function
+///////////////////////////////////////////////////////
+// create a modal or popup message
+///////////////////////////////////////////////////////
 function popup(e, modal) {
     let body = document.querySelector('body');
     let modalBg = document.getElementById(modal);
@@ -97,12 +103,17 @@ function popup(e, modal) {
 
 }
 
-// Informations pour le contact dans le footer
+//////////////////////////////////////////////
+// "about us informations" in each footer of each page
+///////////////////////////////////////////////
 document.getElementById('aboutPopup').addEventListener('click', function (e) {
     popup(e, 'aboutUs');
 });
 
-// Informations pour le 'a propos'' dans le footer
+
+//////////////////////////////////////////////
+// "contact informations" in each footer of each page
+///////////////////////////////////////////////
 document.getElementById('contactPopup').addEventListener('click', function (e) {
     popup(e, 'contactUs');
 });
@@ -114,8 +125,8 @@ export {
     teddiesOrderAPI,
     camerasOrderAPI,
     furnitureOrderAPI,
-    request,
     onLoadCartNumbers,
+    getProductDatas,
     convertPrice,
     popup
 };

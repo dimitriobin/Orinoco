@@ -1,23 +1,22 @@
 import {
-    teddiesAPI,
-    camerasAPI,
-    furnitureAPI,
-    request,
     onLoadCartNumbers,
+    getProductDatas,
     convertPrice,
     popup
 } from './main';
 
-
+////////////////////////////////////////////////////////////////
 // Looking through the url and put informations within constants
+/////////////////////////////////////////////////////////////////
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 const productTheme = params.get('theme');
 const productUrl = `${productTheme}/${productId}`;
-let addToCartBtn = document.getElementById('addToCartBtn');
 
 
+////////////////////////////////////////////////////////////////
 // Take the informations form the product obj and set the page with
+/////////////////////////////////////////////////////////////////
 function setLayout(product) {
     // Define wich option to set according to the theme of product
     let options
@@ -60,34 +59,36 @@ function addToCart(product) {
     item.imgUrl = product.imageUrl;
     item.name = product.name;
     item.price = product.price;
-    // Ecouter le boutton "Ajouter au panier"
+
+    // Listen to the "add to cart" button
+    let addToCartBtn = document.getElementById('addToCartBtn');
     addToCartBtn.addEventListener('click', function () {
-        // Ajouter la valeur de la quantité choisie à l'objet du produit
+        // Add the value of the chosen quantity to the object of the product
         item.quantity = document.getElementById('quantity').value;
-        // Récupérer le tableau de données du localStorage
+        // Retrieve the data table from localStorage
         let cartItems = localStorage.getItem('cartItems');
-        // Convertir ces données en JSON
+        // Convert this data to JSON
         cartItems = JSON.parse(cartItems);
-        // Si le panier est vide
+        // If the cart is empty
         if (cartItems) {
-            // Regarder dans tous le panier
+            // Look through all the cart
             for (let i = 0; i < cartItems.length; i++) {
-                // Si le produit existe déjà dans le panier
+                // If the product already exists in the cart
                 if (cartItems[i].id === item.id) {
-                    // Ajouter la quantité à l'ancienne valeur.
+                    // Add the quantity to the old value.
                     document.getElementById('productAddedTitle').textContent = 'La quantité a été changée !';
                     cartItems[i].quantity = parseInt(cartItems[i].quantity);
                     cartItems[i].quantity += parseInt(item.quantity);
-                    // Renvoyer les données dans le storage sous forme de STRING
+                    // Send data back to storage as a STRING
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 } else if (i === (cartItems.length - 1) && cartItems[i] !== item.id) {
                     document.getElementById('productAddedTitle').innerHTML += `
                     <i class="fas fa-check-circle text-success mr-sm-3"></i>Article ajouté !
                     `
-                    // Ajouter l'objet dans ce tableau
+                    // Add the object in this table
                     cartItems.push(item);
-                    // Renvoyer les données dans le storage sous forme de STRING
+                    // Send data back to storage as a STRING
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 }
@@ -96,19 +97,21 @@ function addToCart(product) {
             document.getElementById('productAddedTitle').innerHTML += `
                 <i class="fas fa-check-circle text-success mr-sm-3"></i>Premier article dans votre panier !
             `
-            // Créer un tableau
+            // initialize an array
             cartItems = [];
-            // Ajouter l'objet dans ce tableau
+            // Add the object in this table
             cartItems.push(item);
-            // Renvoyer les données dans le storage sous forme de STRING
+            // Send data back to storage as a STRING
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
         onLoadCartNumbers();
     })
 }
 
+/////////////////////////////////////////////////////////////////////
 // Make a request with the _ID url and then throw the layout function
-request(productUrl, 'GET', 'json')
+/////////////////////////////////////////////////////////////////////
+getProductDatas(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
         addToCart(product);

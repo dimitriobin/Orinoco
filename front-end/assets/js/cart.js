@@ -1,23 +1,28 @@
 import {
-    teddiesAPI,
-    camerasAPI,
-    furnitureAPI,
-    request,
     convertPrice
 } from './main';
 
+// ////////////////////////////
 // Initialize the total amount 
+// ////////////////////////////
 let total = 0;
-
-// Add the number of product in the h1
+// ////////////////////////////
+// Get the DOM elements
+// ////////////////////////////
 let title = document.getElementById('cartTitle');
 let formSection = document.getElementById('formSection');
 let orderReview = document.getElementById('orderReview');
+
+// ////////////////////////////
+// Get the cart's localStorage
+// ////////////////////////////
 let cartItems = localStorage.getItem('cartItems');
 cartItems = JSON.parse(cartItems);
 
 
-
+// ////////////////////////////
+// Display the number of products in the H1 title
+// ////////////////////////////
 if (cartItems) {
     if (cartItems.length > 0) {
         if (cartItems.length === 1) {
@@ -25,7 +30,7 @@ if (cartItems) {
         } else {
             title.textContent = 'Mon panier (' + cartItems.length + ' articles)'
         }
-        displayTotal();
+        displayTotalCost();
         displayCart();
         formSection.classList.remove('d-none');
     } else {
@@ -35,6 +40,9 @@ if (cartItems) {
     title.textContent = 'Votre panier est vide'
 }
 
+// ////////////////////////////
+// Displaying products ordered
+// ////////////////////////////
 function displayCart(product) {
     let productsReview = document.getElementById('productsReview');
     let listOfProductsTitle = document.createElement('h2');
@@ -88,7 +96,10 @@ function displayCart(product) {
     }
 }
 
-function displayTotal() {
+// ////////////////////////////
+// Display the total cost for the all order
+// ////////////////////////////
+function displayTotalCost() {
     // display the 'total' section
     let totalSection = document.createElement('section');
     orderReview.appendChild(totalSection);
@@ -109,8 +120,9 @@ function displayTotal() {
     `
 }
 
-
-// Set the +1 and -1 button
+// ////////////////////////////
+// Set the +1 and -1 button for quantity in each product
+// ////////////////////////////
 let plusBtn = document.querySelectorAll('.plusBtn');
 let minusBtn = document.querySelectorAll('.minusBtn');
 let counter = document.querySelectorAll('.counter')
@@ -132,7 +144,9 @@ minusBtn.forEach(function (element, index, array) {
     })
 })
 
-// Set the remove btn
+///////////////////////////////////
+// Set the remove btn for each product
+////////////////////////////////////
 let removeBtn = document.querySelectorAll('.removeBtn');
 removeBtn.forEach(function (element, index, array) {
     removeBtn[index].addEventListener('click', function () {
