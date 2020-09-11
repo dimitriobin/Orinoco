@@ -11,13 +11,12 @@ let shopsBtn = document.querySelectorAll('#shopsBtn button')
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 function displayProductByShop(shop) {
+    let listOfProducts = document.querySelector('#listOfProdutcs');
+    // clean the layout for displaying just this shop
+    listOfProducts.innerHTML = '';
     getProductDatas(shop, 'GET', 'json')
         .then(function (datas) {
-            let listOfProducts = document.querySelector('#listOfProdutcs');
-            // clean the layout for displaying just this shop
-            listOfProducts.innerHTML = '';
             // looping through each product datas
-            console.log(datas)
             datas.forEach(product => {
                 let article = document.createElement('article');
                 article.classList.add('mb-3', 'border', 'w-100');
@@ -37,7 +36,21 @@ function displayProductByShop(shop) {
                     `
                 listOfProducts.appendChild(article);
             })
-        });
+        })
+        .catch(error => {
+            console.log(error);
+            listOfProducts.innerHTML += `
+                <article class='mt-5 w-100'>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-md-7 text-center">
+                            <h2>Une erreur est survenue</h2>
+                            <p>Veuillez actualiser la page et réessayer ultérieurement, si le problème persiste contactez-nous via la rubrique 'contact' en bas de cette page.</p>
+                        </div>
+                    </div>
+                </article>
+            `
+
+        })
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -46,7 +59,8 @@ function displayProductByShop(shop) {
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 shopsBtn.forEach(btn => {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
         displayProductByShop(btn.getAttribute('id'));
     });
 })

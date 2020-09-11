@@ -15,14 +15,26 @@ function getProductDatas(theme, method, responseType, sendData, contentType) {
         xhr.open(method, `http://localhost:3000/api/${theme}`);
         xhr.responseType = responseType;
         xhr.setRequestHeader('Content-Type', contentType);
-        xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300 && this.readyState === 4) {
-                resolve(xhr.response)
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if ((this.status >= 200) && (this.status < 300)) {
+                    resolve(xhr.response)
+                    console.log(xhr.status)
+                } else if ((this.status >= 500) && (this.status < 600)) {
+                    let main = document.querySelector('main');
+                    main.innerHTML = '';
+                    main.innerHTML += `
+                            <h1>Notre serveur rencontre un problème technique</h1>
+                            <p>Veuillez attendre quelques minutes puis actualiser la page.
+                            <br>Nous essayons de résoudre le problème dans les plus brefs délais</p>
+                        `
+                } else {
+                    let error = {
+                        status: xhr.status,
+                        statusText: xhr.statusText
+                    }
+                    reject(error);
+                }
             }
         }
         xhr.send(sendData);
