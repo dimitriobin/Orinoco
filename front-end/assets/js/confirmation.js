@@ -1,44 +1,59 @@
 import {
-    teddiesAPI,
-    camerasAPI,
-    furnitureAPI,
-    teddiesOrderAPI,
-    camerasOrderAPI,
-    furnitureOrderAPI,
-    request,
-    onLoadCartNumbers,
     convertPrice
 } from './main.js';
 
-let orderInformations = localStorage.getItem('orders');
-orderInformations = JSON.parse(orderInformations);
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+// Get the localStorage with server response AND the list of products oredered
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+let ordersInformation = localStorage.getItem('ordersInformation');
+ordersInformation = JSON.parse(ordersInformation);
 let productsOrdered = localStorage.getItem('productsOrdered');
 productsOrdered = JSON.parse(productsOrdered);
 
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+// Display a table with orderId, date and shop's category
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 (function displayOrderReferences() {
     let refList = document.getElementById('refList');
     let date = new Date();
     date = date.toLocaleString(date);
-
-    refList.innerHTML +=
-        `
+    ordersInformation.forEach(shop => {
+        refList.innerHTML +=
+            `
         <tr>
+            <td class="text-break">${shop.theme}</td>
             <td class="text-break">${date}</td>
-            <td class="text-break">${orderInformations.orderId}</td>
+            <td class="text-break">${shop.orderId}</td>
         </tr>
-    `
+        `
+    })
 })();
 
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+// With the contact informations, display a confirmation text to 
+// let the client know about the shipping and transaction
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 (function displayClientReferences() {
     let clientReferences = document.getElementById('clientReferences');
     clientReferences.innerHTML += `
-        <p>Merci <span class="font-weight-bold">${orderInformations.contact.firstName}</span> <span class="font-weight-bold">${orderInformations.contact.lastName}</span> d'avoir commandé chez Orinoco !</p>
-        <p>Un mail de confirmation vous sera envoyé à <span class="font-weight-bold">${orderInformations.contact.email}</span> contenant le récapitulatif de
-        votre commande et les informations de livraison à votre adresse <span class="font-weight-bold">${orderInformations.contact.address}</span> à <span class="font-weight-bold">${orderInformations.contact.city}</span>.</p>
+        <p>Merci <span class="font-weight-bold">${ordersInformation[0].contact.firstName}</span> <span class="font-weight-bold">${ordersInformation[0].contact.lastName}</span> d'avoir commandé chez Orinoco !</p>
+        <p>Un mail de confirmation vous sera envoyé à <span class="font-weight-bold">${ordersInformation[0].contact.email}</span> contenant le récapitulatif de
+        votre commande et les informations de livraison à votre adresse <span class="font-weight-bold">${ordersInformation[0].contact.address}</span> à <span class="font-weight-bold">${ordersInformation[0].contact.city}</span>.</p>
     `
 })();
 
-(function displayProducts() {
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+// display again the list of product with all order's details and the total cost at the end
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+(function displayProductsDetails() {
     let articlesOrdered = document.querySelector('#articlesOrdered');
     let total = 0;
     let products = productsOrdered;

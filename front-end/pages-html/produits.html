@@ -39,7 +39,7 @@
                 <a href="../index.html" aria-label="Retournez sur la page principale">
                     <img class="img-responsive p-2"
                         srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
-                        sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
+                        sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
                 <a class="cart text-decoration-none" href="panier.html" aria-label="Visitez votre panier d'achats"
@@ -54,8 +54,14 @@
     </header>
 
     <main class="container py-5 my-auto">
-        <section class="row flex-column flex-md-row justify-content-between align-items-center border my-auto">
-            <a href="" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="" alt=""
+        <section id="mainContent"
+            class="row flex-column flex-md-row justify-content-between align-items-center  my-auto">
+            <h2 class="sr-only">Page de produit</h2>
+            <!-- ////////////////////////////////////////////////////////// 
+                 /////////////////////TEMPLATE PRODUCT//////////////////////
+                ////////////////////////////////////////////////////////////////
+             -->
+            <!-- <a href="" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="" alt=""
                     class="card-img"></a>
             <article class="col-12 col-md-7 text-break">
                 <div class="card-body">
@@ -93,7 +99,7 @@
                     <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au
                         panier</button>
                 </div>
-            </article>
+            </article> -->
 
         </section>
     </main>
@@ -101,7 +107,7 @@
     <!-- Popup for contact informations -->
     <div role="dialog" aria-labelledby="productAddedTitle" id="productAdded" class="modal-bg">
         <div class="modal text-center rounded-lg">
-            <h3 id="productAddedTitle" class="mb-4"></h3>
+            <h3 id="productAddedTitle" class="mb-4">Produit ajouté</h3>
             <div class="row">
                 <a class="col-12 mb-3 btn btn-outline-dark text-dark rounded-pill py-3" href="../index.html">Continuer
                     vos
