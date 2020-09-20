@@ -54,46 +54,13 @@ let sortedOrder = {};
 })();
 
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-// Take each input's value and put it in the contact object
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-function makeContactObject() {
-    let contact = {};
-
-    contact.firstName = document.querySelector('#firstName').value;
-    contact.lastName = document.querySelector('#lastName').value;
-    contact.address = document.querySelector('#address').value;
-    contact.city = document.querySelector('#city').value;
-    contact.email = document.querySelector('#email').value;
-
-    return contact;
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Get an array with all the infos and save it in the localStorage, 
-// also switch the products ordered in the localStorage, this is for reset the cart and let the client do an other one if needed
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function orderStorage(orderArray) {
-
-    localStorage.setItem('ordersInformation', JSON.stringify(orderArray));
-    // Transfert products in an other storage
-    localStorage.setItem('productsOrdered', localStorage.getItem('cartItems'));
-    // Reset the cart
-    localStorage.removeItem('cartItems');
-}
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Create a client side validation of the submission datas
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-(function formValidationLive() {
+(function formValidationFrontSide() {
 
     let validationBtn = document.getElementById('validationBtn');
     let inputs = document.querySelectorAll('#contact input');
@@ -116,18 +83,23 @@ function orderStorage(orderArray) {
 
     // test if the input value is fitting with its regular expression
     function validation(input, regEx) {
+
         // traductor express
         let traductor = {
             firstName: 'prénom',
             lastName: 'nom',
+            streetNumber: 'numéro',
             address: 'adresse',
             city: 'ville',
             email: 'e-mail',
         }
+
+        let error = input.parentNode.querySelector(`input~span`);
         // if not, display a small message to let the client know what's going wrong
         if (!regEx.test(input.value)) {
-            input.nextElementSibling.innerHTML = 'Veuillez entrez votre ' + traductor[`${input.getAttribute('id')}`] + ' au bon format.';
-            input.nextElementSibling.className = 'error active';
+
+            error.innerHTML = 'Veuillez entrez votre ' + traductor[`${input.getAttribute('id')}`] + ' au bon format.';
+            error.className = 'error active';
             // also, remove the input to the validInputs array
             if (validInputs.includes(input)) {
                 validInputs.splice(validInputs.indexOf(input), 1);
@@ -135,8 +107,8 @@ function orderStorage(orderArray) {
 
             // if yes, display a small icon to let the client know that the input value is correct 
         } else {
-            input.nextElementSibling.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
-            input.nextElementSibling.className = 'error';
+            error.innerHTML = '<i class="fas fa-check text-success mt-2"></i>';
+            error.className = 'error';
             // also, add the input to the validInputs array
             if (!validInputs.includes(input)) {
                 validInputs.push(input);
@@ -156,7 +128,7 @@ function orderStorage(orderArray) {
             console.log(validInputs)
             let regEx = new RegExp(input.getAttribute('pattern'));
             validation(input, regEx);
-            if (validInputs.length == 5) {
+            if (validInputs.length == inputs.length) {
                 validationBtn.classList.add('d-none')
                 submitRequest.classList.remove('d-none');
             } else {
@@ -166,6 +138,79 @@ function orderStorage(orderArray) {
         })
     })
 })();
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Take each input's value and put it in the contact object
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+function makeContactObject() {
+    let contact = {};
+
+    let firstName = document.querySelector('#firstName').value;
+    let firstNameRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let lastName = document.querySelector('#lastName').value;
+    let lastNameRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let streetNumber = document.querySelector('#streetNumber').value;
+    let streetNumberRegex = new RegExp('([0-9]{1,4})+$');
+    let streetType = document.querySelector('#streetType').value;
+    let address = document.querySelector('#address').value;
+    let addressRegex = new RegExp("^([A-Za-zÀ-ÿ-'])+$");
+    let city = document.querySelector('#city').value;
+    let cityRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let email = document.querySelector('#email').value;
+    let emailRegex = new RegExp(/^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$/);
+
+    if (firstNameRegex.test(firstName)) {
+        console.log('success');
+        contact.firstName = firstName;
+    } else {
+        console.log('Form validation failed on first name');
+    }
+    if (lastNameRegex.test(lastName)) {
+        console.log('success');
+        contact.lastName = lastName;
+    } else {
+        console.log('Form validation failed on last name');
+    }
+    if (streetNumberRegex.test(streetNumber) && addressRegex.test(address)) {
+        console.log('success');
+        let fullAddress = `${streetNumber} ${streetType} ${address}`;
+        contact.address = fullAddress;
+    } else {
+        console.log('Form validation failed on address');
+    }
+    if (cityRegex.test(city)) {
+        console.log('success');
+        contact.city = city;
+    } else {
+        console.log('Form validation failed on city');
+    }
+    if (emailRegex.test(email)) {
+        console.log('success');
+        contact.email = email;
+    } else {
+        console.log('Form validation failed email');
+    }
+
+    return contact;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Get an array with all the infos and save it in the localStorage, 
+// also switch the products ordered in the localStorage, this is for reset the cart and let the client do an other one if needed
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function orderStorage(orderArray) {
+
+    localStorage.setItem('ordersInformation', JSON.stringify(orderArray));
+    // Transfert products in an other storage
+    localStorage.setItem('productsOrdered', localStorage.getItem('cartItems'));
+    // Reset the cart
+    localStorage.removeItem('cartItems');
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
