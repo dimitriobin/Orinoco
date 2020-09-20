@@ -123,7 +123,7 @@ function addToCart(product) {
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 } else if (i === (cartItems.length - 1) && cartItems[i] !== item.id) {
-                    document.getElementById('productAddedTitle').innerHTML += `
+                    document.getElementById('productAddedTitle').innerHTML = `
                     <i class="fas fa-check-circle text-success mr-sm-3"></i>Article ajouté !
                     `
                     // Add the object in this table
@@ -134,7 +134,7 @@ function addToCart(product) {
                 }
             }
         } else {
-            document.getElementById('productAddedTitle').innerHTML += `
+            document.getElementById('productAddedTitle').innerHTML = `
                 <i class="fas fa-check-circle text-success mr-sm-3"></i>Premier article dans votre panier !
             `
             // initialize an array
