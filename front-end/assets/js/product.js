@@ -1,23 +1,25 @@
 import {
-    teddiesAPI,
-    camerasAPI,
-    furnitureAPI,
-    request,
     onLoadCartNumbers,
+    getProductDatas,
     convertPrice,
     popup
 } from './main';
 
 
+let mainContentSection = document.getElementById('mainContent');
+
+////////////////////////////////////////////////////////////////
 // Looking through the url and put informations within constants
+/////////////////////////////////////////////////////////////////
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 const productTheme = params.get('theme');
-const productUrl = 'http://localhost:3000/api/' + productTheme + '/' + productId;
-let addToCartBtn = document.getElementById('addToCartBtn');
+const productUrl = `${productTheme}/${productId}`;
 
 
+////////////////////////////////////////////////////////////////
 // Take the informations form the product obj and set the page with
+/////////////////////////////////////////////////////////////////
 function setLayout(product) {
     // Define wich option to set according to the theme of product
     let options
@@ -34,20 +36,57 @@ function setLayout(product) {
         default:
             break;
     };
-    // put the content in the DOM (in order of appearance)
-    document.querySelector('title').textContent = product.name;
-    document.getElementById('productImg').setAttribute('src', product.imageUrl);
-    document.getElementById('productImg').setAttribute('alt', 'Image du produit ' + product.name + ', cliquez dessus pour l\'ouvrir dans un nouvel onglet');
-    document.getElementById('productImg').setAttribute('title', 'Image du produit ' + product.name + ', cliquez dessus pour l\'ouvrir dans un nouvel onglet');
-    document.getElementById('productImg').parentNode.setAttribute('href', product.imageUrl);
-    document.getElementById('productName').textContent = product.name;
-    document.getElementById('productRef').textContent = 'REF : ' + product._id;
-    document.getElementById('productDesc').textContent = product.description;
-    // create options in the select form
+    // put the content in the DOM 
+    mainContentSection.innerHTML += `
+    <a href="" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="${product.imageUrl}" alt=""
+                    class="card-img"></a>
+            <article class="col-12 col-md-7 text-break">
+                <div class="card-body">
+                    <h1 id="productName" class="card-title">${product.name}</h1>
+                    <p id="productRef" class="text-muted card-subtitle"><small>ref :
+                    ${product._id}</small></p>
+                    <p id="productDesc" class="card-text ">${product.description}</p>
+                    <div class="form-row align-items-center mb-3">
+                        <label id="productOptions" class="col-auto mr-sm-2" for="inlineFormCustomSelect">Options :
+                        </label>
+                        <select id="inlineFormCustomSelect" class="col-4 custom-select mr-sm-2"></select>
+                    </div>
+                    <div class="form-row align-items-center mb-3">
+                        <label class="col-auto" for="quantity">Quantité : </label>
+                        <select class="col-2 custom-select" name="" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <p id="productPrice" class="lead">Prix : ${convertPrice(product.price)}</p>
+                    <button id="addToCartBtn" type="submit" class="btn btn-success w-75">Ajouter au
+                        panier</button>
+                </div>
+            </article>
+    `
     for (let j = 0; j < options.length; j++) {
         document.getElementById('inlineFormCustomSelect').appendChild(document.createElement('option')).textContent = options[j];
     }
-    document.getElementById('productPrice').textContent = convertPrice(product.price);
+}
+
+function displayError() {
+    let mainContentSection = document.getElementById('mainContent');
+    mainContentSection.innerHTML = '';
+    mainContentSection.innerHTML += `
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="text-center mb-5">Ce produit n'existe pas</h1>
+        <p  class="text-center mb-5">Il semblerait que vous essayez d'accéder à un produit qui n'est pas ou plus dans notre catalogue, pour consulter la liste de nos produits actuellement disponibles veuillez cliquer sur le bouton suivant : </p>
+        <a role="button" class="btn btn-light btn-lg mx-auto" href="../index.html" aria-label="Visitez notre catalogue mis à jours">Notre catalogue</a>
+    </div>
+    `
 }
 
 
@@ -60,34 +99,36 @@ function addToCart(product) {
     item.imgUrl = product.imageUrl;
     item.name = product.name;
     item.price = product.price;
-    // Ecouter le boutton "Ajouter au panier"
+
+    // Listen to the "add to cart" button
+    let addToCartBtn = document.getElementById('addToCartBtn');
     addToCartBtn.addEventListener('click', function () {
-        // Ajouter la valeur de la quantité choisie à l'objet du produit
+        // Add the value of the chosen quantity to the object of the product
         item.quantity = document.getElementById('quantity').value;
-        // Récupérer le tableau de données du localStorage
+        // Retrieve the data table from localStorage
         let cartItems = localStorage.getItem('cartItems');
-        // Convertir ces données en JSON
+        // Convert this data to JSON
         cartItems = JSON.parse(cartItems);
-        // Si le panier est vide
+        // If the cart is empty
         if (cartItems) {
-            // Regarder dans tous le panier
+            // Look through all the cart
             for (let i = 0; i < cartItems.length; i++) {
-                // Si le produit existe déjà dans le panier
+                // If the product already exists in the cart
                 if (cartItems[i].id === item.id) {
-                    // Ajouter la quantité à l'ancienne valeur.
+                    // Add the quantity to the old value.
                     document.getElementById('productAddedTitle').textContent = 'La quantité a été changée !';
                     cartItems[i].quantity = parseInt(cartItems[i].quantity);
                     cartItems[i].quantity += parseInt(item.quantity);
-                    // Renvoyer les données dans le storage sous forme de STRING
+                    // Send data back to storage as a STRING
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 } else if (i === (cartItems.length - 1) && cartItems[i] !== item.id) {
                     document.getElementById('productAddedTitle').innerHTML += `
                     <i class="fas fa-check-circle text-success mr-sm-3"></i>Article ajouté !
                     `
-                    // Ajouter l'objet dans ce tableau
+                    // Add the object in this table
                     cartItems.push(item);
-                    // Renvoyer les données dans le storage sous forme de STRING
+                    // Send data back to storage as a STRING
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
                     break;
                 }
@@ -96,21 +137,29 @@ function addToCart(product) {
             document.getElementById('productAddedTitle').innerHTML += `
                 <i class="fas fa-check-circle text-success mr-sm-3"></i>Premier article dans votre panier !
             `
-            // Créer un tableau
+            // initialize an array
             cartItems = [];
-            // Ajouter l'objet dans ce tableau
+            // Add the object in this table
             cartItems.push(item);
-            // Renvoyer les données dans le storage sous forme de STRING
+            // Send data back to storage as a STRING
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
         onLoadCartNumbers();
     })
 }
 
+/////////////////////////////////////////////////////////////////////
 // Make a request with the _ID url and then throw the layout function
-request(productUrl, 'GET', 'json')
+/////////////////////////////////////////////////////////////////////
+getProductDatas(productUrl, 'GET', 'json')
     .then(function (product) {
         setLayout(product);
         addToCart(product);
-        popup('addToCartBtn', 'productAdded');
-    });
+        document.getElementById('addToCartBtn').addEventListener('click', function (e) {
+            popup(e, 'productAdded');
+        });
+    })
+    .catch(error => {
+        displayError()
+        console.log(error);
+    })

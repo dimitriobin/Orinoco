@@ -6,28 +6,43 @@ const teddiesOrderAPI = 'http://localhost:3000/api/teddies/order';
 const camerasOrderAPI = 'http://localhost:3000/api/cameras/order';
 const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
 
-// XHR method
-function request(url, method, responseType, sendData, contentType) {
+//////////////////////////////////////
+// XHR method for GET and POST methods
+//////////////////////////////////////
+function getProductDatas(theme, method, responseType, sendData, contentType) {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
-        xhr.open(method, url);
+        xhr.open(method, `http://localhost:3000/api/${theme}`);
         xhr.responseType = responseType;
         xhr.setRequestHeader('Content-Type', contentType);
-        xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300 && this.readyState === 4) {
-                resolve(xhr.response)
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if ((this.status >= 200) && (this.status < 300)) {
+                    resolve(xhr.response)
+                    console.log(xhr.status)
+                } else if ((this.status >= 500) && (this.status < 600)) {
+                    let main = document.querySelector('main');
+                    main.innerHTML = '';
+                    main.innerHTML += `
+                            <h1>Notre serveur rencontre un problème technique</h1>
+                            <p>Veuillez attendre quelques minutes puis actualiser la page.
+                            <br>Nous essayons de résoudre le problème dans les plus brefs délais</p>
+                        `
+                } else {
+                    let error = {
+                        status: xhr.status,
+                        statusText: xhr.statusText
+                    }
+                    reject(error);
+                }
             }
         }
         xhr.send(sendData);
     })
 }
-
+/////////////////////////////////////////////////////////////////////
 // Display the number of product in the header (aside the cart icon)
+/////////////////////////////////////////////////////////////////////
 function onLoadCartNumbers() {
     let productNumber = localStorage.getItem('cartItems');
     productNumber = JSON.parse(productNumber);
@@ -35,11 +50,12 @@ function onLoadCartNumbers() {
         document.querySelector('.cart span').textContent = productNumber.length;
         document.getElementById('cartDescription').textContent = 'Vous avez actuellement ' + productNumber.length + 'articles dans votre panier';
     }
-}
-// initialize it
+};
 onLoadCartNumbers();
 
-// Permet de convertir la chaine de charactere pour une meilleure lisibilté du prix
+////////////////////////////////////////////////////////////////////////////////////
+// take a price in centimes in input and put this price in the format "xx.xx€" in output
+//////////////////////////////////////////////////////////////////////////////////////
 function convertPrice(input) {
     let price = JSON.stringify(input);
     let output
@@ -55,58 +71,64 @@ function convertPrice(input) {
     }
 }
 
-// popup function
-function popup(btn, modal) {
+///////////////////////////////////////////////////////
+// create a modal or popup message
+///////////////////////////////////////////////////////
+function popup(e, modal) {
     let body = document.querySelector('body');
-    let modalBtn = document.getElementById(btn);
     let modalBg = document.getElementById(modal);
-    let focusOn = modalBg.children[0].children[0];
     let previousActiveElement;
 
-    modalBtn.addEventListener('click', function (e) {
-        e.stopPropagation()
+    e.stopPropagation();
 
-        previousActiveElement = document.activeElement;
+    modalBg.querySelector('.modal').focus();
+    previousActiveElement = document.activeElement;
 
+    Array.from(document.body.children).forEach(child => {
+        if (child !== modalBg) {
+            child.inert = true;
+        }
+    });
+    modalBg.classList.add('modal-bg-active');
+
+    body.addEventListener('click', function () {
+        modalBg.classList.remove('modal-bg-active');
         Array.from(document.body.children).forEach(child => {
             if (child !== modalBg) {
-                child.inert = true;
+                child.inert = false;
             }
-        })
-        modalBg.classList.add('modal-bg-active');
+        });
+        previousActiveElement.focus();
+    });
 
-        body.addEventListener('click', function () {
+    window.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
             modalBg.classList.remove('modal-bg-active');
             Array.from(document.body.children).forEach(child => {
                 if (child !== modalBg) {
                     child.inert = false;
                 }
-            })
+            });
             previousActiveElement.focus();
+        }
+    });
 
-        })
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
-                modalBg.classList.remove('modal-bg-active')
-                Array.from(document.body.children).forEach(child => {
-                    if (child !== modalBg) {
-                        child.inert = false;
-                    }
-                })
-                previousActiveElement.focus();
-            }
-        })
-
-        modalBg.querySelector('.modal').focus();
-    })
 }
 
-// Informations pour le contact dans le footer
-popup('aboutPopup', 'aboutUs');
+//////////////////////////////////////////////
+// "about us informations" in each footer of each page
+///////////////////////////////////////////////
+document.getElementById('aboutPopup').addEventListener('click', function (e) {
+    popup(e, 'aboutUs');
+});
 
-// Informations pour le 'a propos'' dans le footer
-popup('contactPopup', 'contactUs');
+
+//////////////////////////////////////////////
+// "contact informations" in each footer of each page
+///////////////////////////////////////////////
+document.getElementById('contactPopup').addEventListener('click', function (e) {
+    popup(e, 'contactUs');
+});
 
 export {
     teddiesAPI,
@@ -115,8 +137,8 @@ export {
     teddiesOrderAPI,
     camerasOrderAPI,
     furnitureOrderAPI,
-    request,
     onLoadCartNumbers,
+    getProductDatas,
     convertPrice,
     popup
 };

@@ -39,7 +39,7 @@
                 <a href="../index.html" aria-label="Retournez sur la page principale">
                     <img class="img-responsive mb-4 mb-md-0 p-2"
                         srcset="../assets/img/logo_200.png 200w, ../assets/img/logo_300.png 300w"
-                        sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png 200w"
+                        sizes="(max-width: 991px) 200px, 300px" src="../assets/img/logo_200.png"
                         alt="Orinoco, le e-commerce thématique" title="Logo d'Orinoco'" aria-label="Logo" />
                 </a>
                 <a class="cart text-decoration-none" href="panier.html" aria-label="Visitez votre panier d'achats"
@@ -58,7 +58,7 @@
         <div id="orderReview" class="row no-gutters justify-content-between">
             <!-- Order details -->
             <section id="productsReview" class="bg-white p-4 mb-4 col-12 rounded-lg">
-                <h1 id="cartTitle" class="mb-5 text-center"></h1>
+                <h1 id="cartTitle" class="mb-5 text-center">Votre panier</h1>
                 <!-- Product template
                 <article class="card mb-3 border-0">
                     <div class="row no-gutters w-100">
@@ -120,10 +120,21 @@
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
-                        <label for="address" class="col-md-2 col-form-label">Adresse : </label>
-                        <input type="text" name="address" id="address" class="form-control col-md-10 px-3"
-                            pattern="^([0-9]{1,4})\s([ A-Za-zÀ-ÿ0-9-'])+$" placeholder="111 rue d'Alésia" required>
-                        <span class="error" aria-live="polite"></span>
+                        <label for="streetNumber" class="col-md-2  col-form-label">Adresse : </label>
+                        <div class="input-group col-md-10">
+                            <input type="number" name="streetNumber" id="streetNumber"
+                                class="form-control px-3 col-md-2" pattern="^([0-9]{1,4})+$" placeholder="111" required>
+                            <select name="streetType" id="streetType" class="form-control col-md-2">
+                                <option value="rue" selected>rue</option>
+                                <option value="avenue">avenue</option>
+                                <option value="boulevard">boulevard</option>
+                                <option value="chaussée">chaussée</option>
+                                <option value="allée">allée</option>
+                            </select>
+                            <input type="text" name="address" id="address" class="form-control col-md-8 px-3"
+                                pattern="^([A-Za-zÀ-ÿ-'])+$" placeholder="d'Alésia" required>
+                            <span class="error" aria-live="polite"></span>
+                        </div>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="city" class="col-md-2 col-form-label">Ville : </label>
@@ -137,7 +148,10 @@
                             pattern="^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$" placeholder="johndoe@gmail.com" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
-                    <button type="submit" id="submitRequest" class="btn btn-success w-100">Envoyer</button>
+                    <button type="button" id="validationBtn" class="btn btn-outline-warning w-100" disabled>Veuillez
+                        remplir le
+                        formulaire</button>
+                    <button type="submit" id="submitRequest" class="btn btn-success w-100 d-none">Envoyer</button>
                 </form>
             </div>
         </section>
@@ -146,6 +160,8 @@
     <!-- Popup for confirmation of submission -->
     <div role="alert" id="confirmation" class="modal-bg">
         <div class="modal p-3 text-center rounded-lg">
+            <h3>Votre commande est validée</h3>
+            <p>Vous allez être redirigé vers une page de confirmation de commande !</p>
         </div>
     </div>
 
