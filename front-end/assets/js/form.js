@@ -98,7 +98,7 @@ let sortedOrder = {};
         // if not, display a small message to let the client know what's going wrong
         if (!regEx.test(input.value)) {
 
-            error.innerHTML = 'Veuillez entrez votre ' + traductor[`${input.getAttribute('id')}`] + ' au bon format.';
+            error.innerHTML = 'Veuillez entrer votre ' + traductor[`${input.getAttribute('id')}`] + ' au bon format.';
             error.className = 'error active';
             // also, remove the input to the validInputs array
             if (validInputs.includes(input)) {
@@ -148,18 +148,18 @@ function makeContactObject() {
     let contact = {};
 
     let firstName = document.querySelector('#firstName').value;
-    let firstNameRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let firstNameRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .-]+/);
     let lastName = document.querySelector('#lastName').value;
-    let lastNameRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let lastNameRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .-]+/);
     let streetNumber = document.querySelector('#streetNumber').value;
-    let streetNumberRegex = new RegExp('([0-9]{1,4})+$');
+    let streetNumberRegex = new RegExp(/^[0-9]{1,4}/);
     let streetType = document.querySelector('#streetType').value;
     let address = document.querySelector('#address').value;
-    let addressRegex = new RegExp("^([A-Za-zÀ-ÿ-'])+$");
+    let addressRegex = new RegExp(/^\S[A-Za-zÀ-ÿ-' ]+/);
     let city = document.querySelector('#city').value;
-    let cityRegex = new RegExp('^[A-Za-zÀ-ÿ .-]+$');
+    let cityRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .'-]+/);
     let email = document.querySelector('#email').value;
-    let emailRegex = new RegExp(/^([.-]?\w)*[@]([.-]?\w)*(\.\w{2,3})+$/);
+    let emailRegex = new RegExp(/^([\w.]*)[@](\w*)[.](\w{2,3})$/);
 
     if (firstNameRegex.test(firstName)) {
         console.log('success');
