@@ -109,49 +109,43 @@
                 <form id="contact" class="mt-4" name="contact" novalidate>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="firstName" class=" col-12 col-md-2 col-form-label">Prénom : </label>
+                        <!-- pattern="^\S[A-Za-zÀ-ÿ .-]+" -->
                         <input type="text" name="firstName" id="firstName" class="form-control col-12 col-md-10 px-3"
-                            pattern="^\S[A-Za-zÀ-ÿ .-]+" placeholder="John" required>
+                            placeholder="John" pattern="^\S[A-Za-zÀ-ÿ .-]+" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="lastName" class=" col-12 col-md-2 col-form-label">Nom : </label>
+                        <!-- pattern="^\S[A-Za-zÀ-ÿ .-]+" -->
                         <input type="text" name="lastName" id="lastName" class="form-control col-12 col-md-10 px-3"
-                            pattern="^\S[A-Za-zÀ-ÿ .-]+" placeholder="Doe" required>
+                            placeholder="Doe" pattern="^\S[A-Za-zÀ-ÿ .-]+" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
-                        <label for="streetNumber" class=" col-12 col-md-2  col-form-label">Adresse : </label>
-                        <div class="input-group col-12 col-md-10">
-                            <input type="text" name="streetNumber" id="streetNumber"
-                                class="form-control col-12 px-3 col-md-2" pattern="^[0-9]{1,4}" placeholder="111"
-                                required>
-                            <select name="streetType" id="streetType" class="form-control col-12 col-md-2">
-                                <option value="rue" selected>rue</option>
-                                <option value="avenue">avenue</option>
-                                <option value="boulevard">boulevard</option>
-                                <option value="chaussée">chaussée</option>
-                                <option value="allée">allée</option>
-                            </select>
-                            <input type="text" name="address" id="address" class="form-control col-12 col-md-8 px-3"
-                                pattern="^\S[A-Za-zÀ-ÿ-' ]+" placeholder="d'Alésia" required>
-                            <span class="error" aria-live="polite"></span>
-                        </div>
+                        <label for="adress" class=" col-12 col-md-2  col-form-label">Adresse : </label>
+                        <!-- pattern="^([0-9]{1,4}) ([a-z]+) ([ A-Za-zÀ-ÿ\-']+)$" -->
+                        <input type="text" name="address" id="address" class="form-control col-12 col-md-10 px-3"
+                            placeholder="166 rue d'Alésia" pattern="^([0-9]{1,4}) ([a-z]+) ([ A-Za-zÀ-ÿ\-']+)$"
+                            required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="city" class=" col-12 col-md-2 col-form-label">Ville : </label>
+                        <!-- pattern="^\S[A-Za-zÀ-ÿ .'-]+" -->
                         <input type="text" name="city" id="city" class="form-control col-12 col-md-10 px-3"
-                            pattern="^\S[A-Za-zÀ-ÿ .'-]+" placeholder="Paris" required>
+                            placeholder="Paris" pattern="^\S[A-Za-zÀ-ÿ .'-]+" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="form-group row justify-content-between no-gutters">
                         <label for="email" class=" col-12 col-md-2 col-form-label">E-mail : </label>
+                        <!-- pattern="^([\w.]*)[@](\w*)[.](\w{2,3})$" -->
                         <input type="email" name="email" id="email" class="form-control col-12 col-md-10 px-3"
-                            pattern="^([\w.]*)[@](\w*)[.](\w{2,3})$" placeholder="johndoe@gmail.com" required>
+                            placeholder="johndoe@gmail.com" pattern="^([\w.]*)[@](\w*)[.](\w{2,3})$" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
-                    <button type="button" id="validationBtn" class="btn btn-outline-warning w-100" disabled>Veuillez
-                        remplir le
-                        formulaire</button>
+                    <button type="button" id="validationBtn" class="btn btn-outline-warning w-100" disabled>
+                        Veuillez remplir le formulaire
+                    </button>
                     <button type="submit" id="submitRequest" class="btn btn-success w-100 d-none">Envoyer</button>
                 </form>
             </div>

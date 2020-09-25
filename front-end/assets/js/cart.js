@@ -120,6 +120,38 @@ function displayTotalCost() {
     `
 }
 
+
+// ////////////////////////////
+// Display the form for validation
+// ////////////////////////////
+(function setupFormValidation() {
+    let validValues = localStorage.getItem('validFormValues');
+    validValues = JSON.parse(validValues);
+
+    let traductor = {
+        firstName: 'prénom',
+        lastName: 'nom',
+        address: 'adresse',
+        city: 'ville',
+        email: 'e-mail',
+    }
+
+    document.querySelectorAll('#contact input').forEach(input => {
+        if (validValues) {
+            let inputInStorage = validValues[`${input.getAttribute('id')}`];
+
+            if (inputInStorage) {
+                input.setAttribute('value', inputInStorage);
+            } else {
+                let error = input.parentNode.querySelector(`input~span`);
+
+                error.innerHTML = `Veuillez entrer votre ${traductor[`${input.getAttribute('id')}`]} au bon format.`;
+                error.className = 'error active';
+            }
+        }
+    });
+})();
+
 // ////////////////////////////
 // Set the +1 and -1 button for quantity in each product
 // ////////////////////////////

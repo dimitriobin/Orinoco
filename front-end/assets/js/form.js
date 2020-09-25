@@ -71,15 +71,27 @@ let sortedOrder = {};
     function toUpperCaseFirstLetter(input) {
         input.addEventListener('input', () => {
             input.value = input.value.replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
-        })
+        });
     }
 
     // in each change in the input, replace the all string by the same but in lowercase.
     function toLowerCase(input) {
         input.addEventListener('input', () => {
             input.value = input.value.toLowerCase();
-        })
+        });
     }
+
+    // Remove white space in the begining of an input value
+    (function removeWhiteSpaces() {
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = input.value.trimStart();
+            });
+            input.addEventListener('blur', () => {
+                input.value = input.value.trimEnd();
+            });
+        });
+    })();
 
     // test if the input value is fitting with its regular expression
     function validation(input, regEx) {
@@ -88,7 +100,6 @@ let sortedOrder = {};
         let traductor = {
             firstName: 'prénom',
             lastName: 'nom',
-            streetNumber: 'numéro',
             address: 'adresse',
             city: 'ville',
             email: 'e-mail',
@@ -147,53 +158,54 @@ let sortedOrder = {};
 function makeContactObject() {
     let contact = {};
 
-    let firstName = document.querySelector('#firstName').value;
-    let firstNameRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .-]+/);
-    let lastName = document.querySelector('#lastName').value;
-    let lastNameRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .-]+/);
-    let streetNumber = document.querySelector('#streetNumber').value;
-    let streetNumberRegex = new RegExp(/^[0-9]{1,4}/);
-    let streetType = document.querySelector('#streetType').value;
-    let address = document.querySelector('#address').value;
-    let addressRegex = new RegExp(/^\S[A-Za-zÀ-ÿ-' ]+/);
-    let city = document.querySelector('#city').value;
-    let cityRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .'-]+/);
-    let email = document.querySelector('#email').value;
+    let namesRegex = new RegExp(/^\S[A-Za-zÀ-ÿ .-]+/);
+    let addressRegex = new RegExp(/([0-9]{1,4}) ([a-z]+) ([ A-Za-zÀ-ÿ\-']+)/);
     let emailRegex = new RegExp(/^([\w.]*)[@](\w*)[.](\w{2,3})$/);
 
-    if (firstNameRegex.test(firstName)) {
-        console.log('success');
-        contact.firstName = firstName;
-    } else {
-        console.log('Form validation failed on first name');
-    }
-    if (lastNameRegex.test(lastName)) {
-        console.log('success');
-        contact.lastName = lastName;
-    } else {
-        console.log('Form validation failed on last name');
-    }
-    if (streetNumberRegex.test(streetNumber) && addressRegex.test(address)) {
-        console.log('success');
-        let fullAddress = `${streetNumber} ${streetType} ${address}`;
-        contact.address = fullAddress;
-    } else {
-        console.log('Form validation failed on address');
-    }
-    if (cityRegex.test(city)) {
-        console.log('success');
-        contact.city = city;
-    } else {
-        console.log('Form validation failed on city');
-    }
-    if (emailRegex.test(email)) {
-        console.log('success');
-        contact.email = email;
-    } else {
-        console.log('Form validation failed email');
-    }
 
-    return contact;
+    document.querySelectorAll('#contact input').forEach(input => {
+        switch (input.getAttribute('id')) {
+            case 'firstName':
+                if (namesRegex.test(input.value)) {
+                    contact.firstName = input.value.trim().replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+                }
+                break;
+            case 'lastName':
+                if (namesRegex.test(input.value)) {
+                    contact.lastName = input.value.trim().replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+                }
+                break;
+            case 'address':
+                if (addressRegex.test(input.value)) {
+                    contact.address = input.value.trim();
+                }
+                break;
+            case 'city':
+                if (namesRegex.test(input.value)) {
+                    contact.city = input.value.trim().replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+                }
+                break;
+            case 'email':
+                if (emailRegex.test(input.value)) {
+                    contact.email = input.value.trim().toLowerCase();
+                }
+                break;
+
+            default:
+                break;
+        }
+    });
+
+    try {
+        if (contact.firstName && contact.lastName && contact.address && contact.city && contact.email) {
+            return contact;
+        } else {
+            throw new Error()
+        }
+    } catch (error) {
+        localStorage.setItem('validFormValues', JSON.stringify(contact));
+        window.location = 'panier.html';
+    }
 }
 
 
