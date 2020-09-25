@@ -71,15 +71,27 @@ let sortedOrder = {};
     function toUpperCaseFirstLetter(input) {
         input.addEventListener('input', () => {
             input.value = input.value.replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
-        })
+        });
     }
 
     // in each change in the input, replace the all string by the same but in lowercase.
     function toLowerCase(input) {
         input.addEventListener('input', () => {
             input.value = input.value.toLowerCase();
-        })
+        });
     }
+
+    // Remove white space in the begining of an input value
+    (function removeWhiteSpaces() {
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = input.value.trimStart();
+            });
+            input.addEventListener('blur', () => {
+                input.value = input.value.trimEnd();
+            });
+        });
+    })();
 
     // test if the input value is fitting with its regular expression
     function validation(input, regEx) {

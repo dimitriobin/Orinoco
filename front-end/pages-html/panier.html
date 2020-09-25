@@ -125,13 +125,8 @@
                             <input type="text" name="streetNumber" id="streetNumber"
                                 class="form-control col-12 px-3 col-md-2" pattern="^[0-9]{1,4}" placeholder="111"
                                 required>
-                            <select name="streetType" id="streetType" class="form-control col-12 col-md-2">
-                                <option value="rue" selected>rue</option>
-                                <option value="avenue">avenue</option>
-                                <option value="boulevard">boulevard</option>
-                                <option value="chaussée">chaussée</option>
-                                <option value="allée">allée</option>
-                            </select>
+                            <input type="text" name="streetType" id="streetType" class="form-control col-12 col-md-2"
+                                pattern="^\S[A-Za-zÀ-ÿ]+" placeholder="rue" required>
                             <input type="text" name="address" id="address" class="form-control col-12 col-md-8 px-3"
                                 pattern="^\S[A-Za-zÀ-ÿ-' ]+" placeholder="d'Alésia" required>
                             <span class="error" aria-live="polite"></span>
