@@ -38,7 +38,7 @@ function setLayout(product) {
     };
     // put the content in the DOM 
     mainContentSection.innerHTML += `
-    <a href="" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="${product.imageUrl}" alt=""
+    <a href="${product.imageUrl}" class="col-12 col-md-5 my-auto" target="_blank"><img id="productImg" src="${product.imageUrl}" alt=""
                     class="card-img"></a>
             <article class="col-12 col-md-7 text-break">
                 <div class="card-body">
