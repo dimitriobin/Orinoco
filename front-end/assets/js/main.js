@@ -98,7 +98,6 @@ function popup(e, modal) {
                 child.inert = false;
             }
         });
-        previousActiveElement.focus();
     });
 
     window.addEventListener('keydown', (e) => {
@@ -109,7 +108,6 @@ function popup(e, modal) {
                     child.inert = false;
                 }
             });
-            previousActiveElement.focus();
         }
     });
 
