@@ -82,16 +82,11 @@ let sortedOrder = {};
     }
 
     // Remove white space in the begining of an input value
-    (function removeWhiteSpaces() {
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {
-                input.value = input.value.trimStart();
-            });
-            input.addEventListener('blur', () => {
-                input.value = input.value.trimEnd();
-            });
+    function removeWhiteSpaces(input) {
+        input.addEventListener('keyup', () => {
+            input.value = input.value.replace(' ', '');
         });
-    })();
+    };
 
     // test if the input value is fitting with its regular expression
     function validation(input, regEx) {
@@ -128,7 +123,9 @@ let sortedOrder = {};
     }
 
     toUpperCaseFirstLetter(firstName);
+    removeWhiteSpaces(firstName);
     toUpperCaseFirstLetter(lastName);
+    removeWhiteSpaces(lastName);
     toUpperCaseFirstLetter(city);
     toLowerCase(email);
 
@@ -167,12 +164,12 @@ function makeContactObject() {
         switch (input.getAttribute('id')) {
             case 'firstName':
                 if (namesRegex.test(input.value)) {
-                    contact.firstName = input.value.trim().replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+                    contact.firstName = input.value.replace(' ', '').replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
                 }
                 break;
             case 'lastName':
                 if (namesRegex.test(input.value)) {
-                    contact.lastName = input.value.trim().replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
+                    contact.lastName = input.value.replace(' ', '').replace(input.value.slice(0, 1), input.value.slice(0, 1).toUpperCase());
                 }
                 break;
             case 'address':
@@ -200,7 +197,7 @@ function makeContactObject() {
         if (contact.firstName && contact.lastName && contact.address && contact.city && contact.email) {
             return contact;
         } else {
-            throw new Error()
+            throw new Error();
         }
     } catch (error) {
         localStorage.setItem('validFormValues', JSON.stringify(contact));
