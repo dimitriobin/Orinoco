@@ -1,10 +1,10 @@
 // APIs
-const teddiesAPI = 'http://localhost:3000/api/teddies';
-const camerasAPI = 'http://localhost:3000/api/cameras';
-const furnitureAPI = 'http://localhost:3000/api/furniture';
-const teddiesOrderAPI = 'http://localhost:3000/api/teddies/order';
-const camerasOrderAPI = 'http://localhost:3000/api/cameras/order';
-const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
+const teddiesAPI = 'https://p05-orinoco-api.herokuapp.com/api/teddies';
+const camerasAPI = 'https://p05-orinoco-api.herokuapp.com/api/cameras';
+const furnitureAPI = 'https://p05-orinoco-api.herokuapp.com/api/furniture';
+const teddiesOrderAPI = 'https://p05-orinoco-api.herokuapp.com/api/teddies/order';
+const camerasOrderAPI = 'https://p05-orinoco-api.herokuapp.com/api/cameras/order';
+const furnitureOrderAPI = 'https://p05-orinoco-api.herokuapp.com/api/furniture/order';
 
 //////////////////////////////////////
 // XHR method for GET and POST methods
@@ -12,7 +12,7 @@ const furnitureOrderAPI = 'http://localhost:3000/api/furniture/order';
 function getProductDatas(theme, method, responseType, sendData, contentType) {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
-        xhr.open(method, `http://localhost:3000/api/${theme}`);
+        xhr.open(method, `https://p05-orinoco-api.herokuapp.com/api/${theme}`);
         xhr.responseType = responseType;
         xhr.setRequestHeader('Content-Type', contentType);
         xhr.onreadystatechange = function () {
